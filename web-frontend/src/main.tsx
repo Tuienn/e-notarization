@@ -1,6 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import App from './App.tsx'
+import { RouterProvider } from '@tanstack/react-router'
+import { router } from './router'
 import ThemeProvider from './components/providers/ThemeProvider.tsx'
 import CssBaseline from '@mui/material/CssBaseline'
 import TanstackQueryProvider from './components/providers/TanstackQueryProvider.tsx'
@@ -12,7 +13,7 @@ createRoot(document.getElementById('root')!).render(
             <CssBaseline />
             <TanstackQueryProvider>
                 <NotificationProvider>
-                    <App />
+                    <RouterProvider router={router} />
                 </NotificationProvider>
             </TanstackQueryProvider>
         </ThemeProvider>
