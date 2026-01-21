@@ -12,9 +12,8 @@ createRoot(document.getElementById('root')!).render(
         <ThemeProvider>
             <CssBaseline />
             <TanstackQueryProvider>
-                <NotificationProvider>
-                    <RouterProvider router={router} />
-                </NotificationProvider>
+                <RouterProvider router={router} />
+                <NotificationProvider />
             </TanstackQueryProvider>
         </ThemeProvider>
     </StrictMode>

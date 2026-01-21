@@ -6,7 +6,7 @@ interface Props {
     children: ReactNode
 }
 
-export default function ThemeProvider(props: Props) {
+const ThemeProvider = (props: Props) => {
     const theme = createTheme({
         typography: {
             fontFamily: [
@@ -26,3 +26,5 @@ export default function ThemeProvider(props: Props) {
 
     return <MuiThemeProvider theme={theme}>{props.children}</MuiThemeProvider>
 }
+
+export default ThemeProvider

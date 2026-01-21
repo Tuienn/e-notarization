@@ -1,46 +1,37 @@
 import Snackbar from '@mui/material/Snackbar'
-import { createContext, useCallback, useState, type ReactNode } from 'react'
-import Alert, { type AlertColor } from '@mui/material/Alert'
+import Alert from '@mui/material/Alert'
+import CircularProgress from '@mui/material/CircularProgress'
+import { useNotificationStore } from '../../stores/notification/notification.store'
 
-interface INotificationContext {
-    notify: (message: string, severity?: AlertColor) => void
-}
+const NotificationProvider = () => {
+    const { open, message, severity, stopNotify } = useNotificationStore()
 
-interface Props {
-    children: ReactNode
-}
+    const alertSeverity = severity === 'loading' ? 'info' : severity
 
-export const NotificationContext = createContext<INotificationContext | undefined>(undefined)
-
-export default function NotificationProvider(props: Props) {
-    const [open, setOpen] = useState(false)
-    const [message, setMessage] = useState('')
-    const [severity, setSeverity] = useState<AlertColor>('info')
-
-    const notify = useCallback((msg: string, sev: AlertColor = 'info') => {
-        setMessage(msg)
-        setSeverity(sev)
-        setOpen(true)
-    }, [])
+    const autoHideDuration = severity === 'error' || severity === 'loading' ? null : 4000
 
     const handleClose = (_event?: React.SyntheticEvent | Event, reason?: string) => {
         if (reason === 'clickaway') return
-        setOpen(false)
+        stopNotify()
     }
 
     return (
-        <NotificationContext.Provider value={{ notify }}>
-            {props.children}
-            <Snackbar
-                open={open}
-                autoHideDuration={severity === 'error' ? null : 4000}
+        <Snackbar
+            open={open}
+            autoHideDuration={autoHideDuration}
+            onClose={handleClose}
+            anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+        >
+            <Alert
+                elevation={6}
                 onClose={handleClose}
-                anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+                severity={alertSeverity}
+                icon={severity === 'loading' ? <CircularProgress size={16} /> : undefined}
             >
-                <Alert elevation={6} onClose={handleClose} severity={severity}>
-                    {message}
-                </Alert>
-            </Snackbar>
-        </NotificationContext.Provider>
+                {message}
+            </Alert>
+        </Snackbar>
     )
 }
+
+export default NotificationProvider
