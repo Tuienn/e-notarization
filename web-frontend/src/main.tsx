@@ -7,6 +7,8 @@ import CssBaseline from '@mui/material/CssBaseline'
 import TanstackQueryProvider from './components/providers/TanstackQueryProvider.tsx'
 import NotificationProvider from './components/providers/NotificationProvider.tsx'
 
+import './i18n'
+
 createRoot(document.getElementById('root')!).render(
     <StrictMode>
         <ThemeProvider>
