@@ -1,12 +1,12 @@
 import type { AlertColor } from '@mui/material/Alert'
 
-export type NotificationSeverity = AlertColor | 'loading'
+type INotificationSeverity = AlertColor | 'loading'
 
-export interface NotificationState {
+export interface INotificationState {
     open: boolean
     message: string
-    severity: NotificationSeverity
+    severity: INotificationSeverity
 
-    notify: (message: string, severity?: NotificationSeverity) => void
+    notify: (message: string, severity?: INotificationSeverity) => void
     stopNotify: () => void
 }

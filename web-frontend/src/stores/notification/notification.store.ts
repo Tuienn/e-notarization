@@ -1,10 +1,10 @@
 import { create } from 'zustand'
 import type { AlertColor } from '@mui/material/Alert'
-import type { NotificationState } from './notification.types'
+import type { INotificationState } from './notification.types'
 
 export type NotificationSeverity = AlertColor | 'loading'
 
-export const useNotificationStore = create<NotificationState>((set) => ({
+export const useNotificationStore = create<INotificationState>((set) => ({
     open: false,
     message: '',
     severity: 'info',

@@ -9,18 +9,11 @@ interface Props {
 const ThemeProvider = (props: Props) => {
     const theme = createTheme({
         typography: {
-            fontFamily: [
-                '-apple-system',
-                'BlinkMacSystemFont',
-                '"Segoe UI"',
-                'Roboto',
-                '"Helvetica Neue"',
-                'Arial',
-                'sans-serif',
-                '"Apple Color Emoji"',
-                '"Segoe UI Emoji"',
-                '"Segoe UI Symbol"'
-            ].join(',')
+            fontFamily: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Roboto', 'sans-serif'].join(','),
+            button: {
+                textTransform: 'none', // Không tự động viết hoa
+                fontWeight: 500
+            }
         }
     })
 
