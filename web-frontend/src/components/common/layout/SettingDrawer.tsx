@@ -12,7 +12,7 @@ const SettingDrawer: React.FC = () => {
                 <SettingsIcon />
             </IconButton>
             <CustomDrawer open={open} onClose={() => setOpen(false)}>
-                Test content
+                Test setting
             </CustomDrawer>
         </>
     )

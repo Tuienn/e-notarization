@@ -16,6 +16,7 @@ const BottomNavbar: React.FC<Props> = (props) => {
             <Toolbar sx={{ justifyContent: 'space-around', backgroundColor: 'background.paper' }}>
                 {props.items.map((item) => (
                     <Button
+                        key={item.hrefTo}
                         to={item.hrefTo}
                         component={Link}
                         sx={{ flexDirection: 'column', fontWeight: 'bold' }}
