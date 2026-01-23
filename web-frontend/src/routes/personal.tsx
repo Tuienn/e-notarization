@@ -1,10 +1,5 @@
-import { createFileRoute } from '@tanstack/react-router'
-import MainLayout from '../components/common/layout/MainLayout'
+import { createFileRoute, lazyRouteComponent } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/personal')({
-    component: PersonalPage
+    component: lazyRouteComponent(() => import('../components/pages/personal'))
 })
-
-function PersonalPage() {
-    return <MainLayout>Thong tin ca nhan</MainLayout>
-}
