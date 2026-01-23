@@ -1,6 +1,6 @@
-import { Route as rootRoute } from './routes/__root'
-import { Route as IndexRoute } from './routes/index'
-import { Route as PersonalRoute } from './routes/personal'
+import { Route as rootRoute } from './__root'
+import { Route as IndexRoute } from './index'
+import { Route as PersonalRoute } from './personal'
 
 const IndexRouteRoute = IndexRoute
 
