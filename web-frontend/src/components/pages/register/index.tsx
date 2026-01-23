@@ -16,42 +16,59 @@ import Visibility from '@mui/icons-material/Visibility'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
 import Logo from '../../../assets/svg/logo.svg?react'
 
-const LoginPage: React.FC = () => {
+const RegisterPage: React.FC = () => {
     const { t } = useTranslation('auth')
     const [showPassword, setShowPassword] = useState(false)
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false)
 
-    const loginSchema = useMemo(
+    const registerSchema = useMemo(
         () =>
-            z.object({
-                username: z.string().min(1, t('login.error.usernameRequired')),
-                password: z.string().min(1, t('login.error.passwordRequired'))
-            }),
+            z
+                .object({
+                    username: z
+                        .string()
+                        .min(1, t('register.error.usernameRequired'))
+                        .min(3, t('register.error.usernameMinLength')),
+                    password: z
+                        .string()
+                        .min(1, t('register.error.passwordRequired'))
+                        .min(6, t('register.error.passwordMinLength')),
+                    confirmPassword: z.string().min(1, t('register.error.confirmPasswordRequired'))
+                })
+                .refine((data) => data.password === data.confirmPassword, {
+                    message: t('register.error.passwordsNotMatch'),
+                    path: ['confirmPassword']
+                }),
         [t]
     )
 
-    type LoginFormData = z.infer<typeof loginSchema>
+    type RegisterFormData = z.infer<typeof registerSchema>
 
     const {
         register,
         handleSubmit,
         formState: { errors, isSubmitting }
-    } = useForm<LoginFormData>({
-        resolver: zodResolver(loginSchema)
+    } = useForm<RegisterFormData>({
+        resolver: zodResolver(registerSchema)
     })
 
-    const onSubmit = async (data: LoginFormData) => {
+    const onSubmit = async (data: RegisterFormData) => {
         try {
-            console.log('Login data:', data)
+            console.log('Register data:', data)
             // TODO: Integrate with auth service
-            // const response = await AuthService.login(data);
+            // const response = await AuthService.register(data);
             // Handle success
         } catch (error) {
-            console.error('Login error:', error)
+            console.error('Register error:', error)
         }
     }
 
     const handleTogglePasswordVisibility = () => {
         setShowPassword((prev) => !prev)
+    }
+
+    const handleToggleConfirmPasswordVisibility = () => {
+        setShowConfirmPassword((prev) => !prev)
     }
 
     return (
@@ -62,10 +79,10 @@ const LoginPage: React.FC = () => {
                         <Logo width={30} />
                         <Stack spacing={1} alignItems='center'>
                             <Typography variant='h4' component='h1' fontWeight='bold'>
-                                {t('login.title')}
+                                {t('register.title')}
                             </Typography>
                             <Typography variant='body2' color='text.secondary'>
-                                {t('login.subtitle')}
+                                {t('register.subtitle')}
                             </Typography>
                         </Stack>
                     </Stack>
@@ -73,7 +90,7 @@ const LoginPage: React.FC = () => {
                     <Stack component='form' onSubmit={handleSubmit(onSubmit)} spacing={2} noValidate>
                         <TextField
                             {...register('username')}
-                            label={t('login.username')}
+                            label={t('register.username')}
                             error={!!errors.username}
                             helperText={errors.username?.message || ''}
                             fullWidth
@@ -84,12 +101,12 @@ const LoginPage: React.FC = () => {
 
                         <TextField
                             {...register('password')}
-                            label={t('login.password')}
+                            label={t('register.password')}
                             type={showPassword ? 'text' : 'password'}
                             error={!!errors.password}
                             helperText={errors.password?.message || ''}
                             fullWidth
-                            autoComplete='current-password'
+                            autoComplete='new-password'
                             slotProps={{
                                 input: {
                                     endAdornment: (
@@ -108,18 +125,44 @@ const LoginPage: React.FC = () => {
                             required
                         />
 
+                        <TextField
+                            {...register('confirmPassword')}
+                            label={t('register.confirmPassword')}
+                            type={showConfirmPassword ? 'text' : 'password'}
+                            error={!!errors.confirmPassword}
+                            helperText={errors.confirmPassword?.message || ''}
+                            fullWidth
+                            autoComplete='new-password'
+                            slotProps={{
+                                input: {
+                                    endAdornment: (
+                                        <InputAdornment position='end'>
+                                            <IconButton
+                                                onClick={handleToggleConfirmPasswordVisibility}
+                                                edge='end'
+                                                aria-label='toggle confirm password visibility'
+                                            >
+                                                {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
+                                            </IconButton>
+                                        </InputAdornment>
+                                    )
+                                }
+                            }}
+                            required
+                        />
+
                         <Button type='submit' variant='contained' size='large' disabled={isSubmitting} fullWidth>
-                            {t('login.submit')}
+                            {t('register.submit')}
                         </Button>
                     </Stack>
 
                     <Stack direction='row' spacing={0.5} justifyContent='center'>
                         <Typography variant='body2' color='text.secondary'>
-                            {t('login.noAccount')}
+                            {t('register.hasAccount')}
                         </Typography>
-                        <Link to='/register'>
+                        <Link to='/login'>
                             <Typography variant='body2' color='primary' fontWeight='medium'>
-                                {t('login.signUp')}
+                                {t('register.signIn')}
                             </Typography>
                         </Link>
                     </Stack>
@@ -129,4 +172,4 @@ const LoginPage: React.FC = () => {
     )
 }
 
-export default LoginPage
+export default RegisterPage

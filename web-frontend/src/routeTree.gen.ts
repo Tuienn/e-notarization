@@ -9,11 +9,17 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as RegisterRouteImport } from './routes/register'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as LayoutRouteImport } from './routes/_layout'
 import { Route as LayoutIndexRouteImport } from './routes/_layout/index'
 import { Route as LayoutPersonalRouteImport } from './routes/_layout/personal'
 
+const RegisterRoute = RegisterRouteImport.update({
+    id: '/register',
+    path: '/register',
+    getParentRoute: () => rootRouteImport
+} as any)
 const LoginRoute = LoginRouteImport.update({
     id: '/login',
     path: '/login',
@@ -37,10 +43,12 @@ const LayoutPersonalRoute = LayoutPersonalRouteImport.update({
 export interface FileRoutesByFullPath {
     '/': typeof LayoutIndexRoute
     '/login': typeof LoginRoute
+    '/register': typeof RegisterRoute
     '/personal': typeof LayoutPersonalRoute
 }
 export interface FileRoutesByTo {
     '/login': typeof LoginRoute
+    '/register': typeof RegisterRoute
     '/personal': typeof LayoutPersonalRoute
     '/': typeof LayoutIndexRoute
 }
@@ -48,24 +56,33 @@ export interface FileRoutesById {
     __root__: typeof rootRouteImport
     '/_layout': typeof LayoutRouteWithChildren
     '/login': typeof LoginRoute
+    '/register': typeof RegisterRoute
     '/_layout/personal': typeof LayoutPersonalRoute
     '/_layout/': typeof LayoutIndexRoute
 }
 export interface FileRouteTypes {
     fileRoutesByFullPath: FileRoutesByFullPath
-    fullPaths: '/' | '/login' | '/personal'
+    fullPaths: '/' | '/login' | '/register' | '/personal'
     fileRoutesByTo: FileRoutesByTo
-    to: '/login' | '/personal' | '/'
-    id: '__root__' | '/_layout' | '/login' | '/_layout/personal' | '/_layout/'
+    to: '/login' | '/register' | '/personal' | '/'
+    id: '__root__' | '/_layout' | '/login' | '/register' | '/_layout/personal' | '/_layout/'
     fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
     LayoutRoute: typeof LayoutRouteWithChildren
     LoginRoute: typeof LoginRoute
+    RegisterRoute: typeof RegisterRoute
 }
 
 declare module '@tanstack/react-router' {
     interface FileRoutesByPath {
+        '/register': {
+            id: '/register'
+            path: '/register'
+            fullPath: '/register'
+            preLoaderRoute: typeof RegisterRouteImport
+            parentRoute: typeof rootRouteImport
+        }
         '/login': {
             id: '/login'
             path: '/login'
@@ -111,6 +128,7 @@ const LayoutRouteWithChildren = LayoutRoute._addFileChildren(LayoutRouteChildren
 
 const rootRouteChildren: RootRouteChildren = {
     LayoutRoute: LayoutRouteWithChildren,
-    LoginRoute: LoginRoute
+    LoginRoute: LoginRoute,
+    RegisterRoute: RegisterRoute
 }
 export const routeTree = rootRouteImport._addFileChildren(rootRouteChildren)._addFileTypes<FileRouteTypes>()

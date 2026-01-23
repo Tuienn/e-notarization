@@ -82,7 +82,7 @@ src/
 - **Imports:** Tuân thủ `autoImportSpecifierExcludeRegexes: ["^@mui/[^/]+$"]`. Luôn import sâu vào từng module (`@mui/material/Button` thay vì `@mui/material`).
 - **Layout:**
     - Sử dụng `Box`, `Stack` thay thế cho `div`.
-    - Sử dụng MUI System Props trực tiếp: `<Box p={2} />` thay vì `style={{ padding: '16px' }}`.
+    - Sử dụng MUI System Props trực tiếp ví dụ `<Box p={2} />` thay vì `style={{ padding: '16px' }}`.
     - Ưu tiên `Stack` cho layout flexbox thay vì `<Box display="flex">`.
 - **Component Usage:** Ưu tiên tối đa các component của MUI, hạn chế thẻ HTML thô.
 

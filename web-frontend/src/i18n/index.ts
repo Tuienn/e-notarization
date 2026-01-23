@@ -4,9 +4,10 @@ import LanguageDetector from 'i18next-browser-languagedetector'
 
 import EN_HOME from './locales/en/home.json'
 import EN_LAYOUT from './locales/en/layout.json'
+import EN_AUTH from './locales/en/auth.json'
 
 export const resources = {
-    en: { home: EN_HOME, layout: EN_LAYOUT }
+    en: { home: EN_HOME, layout: EN_LAYOUT, auth: EN_AUTH }
 }
 
 export const defaultNS = 'home'
@@ -17,7 +18,7 @@ i18n.use(LanguageDetector)
         resources,
         fallbackLng: 'en',
         defaultNS,
-        ns: ['home'],
+        ns: ['home', 'auth'],
         lng: 'en', // Force ngôn ngữ mặc định là 'en'
         interpolation: {
             escapeValue: false
