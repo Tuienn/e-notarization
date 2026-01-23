@@ -1,7 +1,5 @@
-import MainLayout from '../../common/layout/MainLayout'
-
 const HomePage: React.FC = () => {
-    return <MainLayout>Test content</MainLayout>
+    return <div>Test content</div>
 }
 
 export default HomePage

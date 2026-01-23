@@ -1,8 +1,9 @@
 import AppBar from '@mui/material/AppBar'
-import Toolbar from '@mui/material/Toolbar'
+import Box from '@mui/material/Box'
+import BottomNavigation from '@mui/material/BottomNavigation'
+import BottomNavigationAction from '@mui/material/BottomNavigationAction'
 
 import type { INavbarItem } from '../../../types/common'
-import Button from '@mui/material/Button'
 import { Link } from '@tanstack/react-router'
 
 interface Props {
@@ -10,23 +11,23 @@ interface Props {
     activeHrefTo: string
 }
 
-const BottomNavbar: React.FC<Props> = (props) => {
+const BottomNavbar: React.FC<Props> = ({ items, activeHrefTo }) => {
     return (
         <AppBar position='fixed' sx={{ top: 'auto', bottom: 0 }}>
-            <Toolbar sx={{ justifyContent: 'space-around', backgroundColor: 'background.paper' }}>
-                {props.items.map((item) => (
-                    <Button
-                        key={item.hrefTo}
-                        to={item.hrefTo}
-                        component={Link}
-                        sx={{ flexDirection: 'column', fontWeight: 'bold' }}
-                        color={props.activeHrefTo === item.hrefTo ? 'secondary' : 'primary'}
-                    >
-                        {item.icon}
-                        {item.label}
-                    </Button>
-                ))}
-            </Toolbar>
+            <Box bgcolor='background.paper'>
+                <BottomNavigation showLabels value={activeHrefTo}>
+                    {items.map((item) => (
+                        <BottomNavigationAction
+                            key={item.hrefTo}
+                            label={item.label}
+                            icon={item.icon}
+                            value={item.hrefTo}
+                            component={Link}
+                            to={item.hrefTo}
+                        />
+                    ))}
+                </BottomNavigation>
+            </Box>
         </AppBar>
     )
 }
