@@ -1,9 +1,11 @@
 {
     "home": "Home",
+    "personal": "Personal",
     "language": {
         "en": "English",
         "vi": "Vietnamese"
     },
     "login": "Login",
-    "register": "Register"
+    "deposit": "Deposit",
+    "withdraw": "Withdraw"
 }

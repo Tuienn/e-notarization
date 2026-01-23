@@ -1,8 +1,8 @@
 import { decrypt, encrypt } from '../../lib/handleCrypto'
-import { useAuthLocalStore } from './authLocal.store'
-import { useAuthSessionStore } from './authSession.store'
+import { useRefreshTokenStore } from './refreshToken.store'
+import { useAccessTokenStore } from './accessToken.store'
 
-export const authFacade = {
+export const tokenFacade = {
     login: (accessToken: string, refreshToken: string) => {
         const encryptedAccessToken = encrypt(accessToken)
         const encryptedRefreshToken = encrypt(refreshToken)
@@ -11,17 +11,17 @@ export const authFacade = {
             throw new Error('Failed to encrypt access token or refresh token')
         }
 
-        useAuthSessionStore.getState().setAccessToken(encryptedAccessToken)
-        useAuthLocalStore.getState().setRefreshToken(encryptedRefreshToken)
+        useAccessTokenStore.getState().setAccessToken(encryptedAccessToken)
+        useRefreshTokenStore.getState().setRefreshToken(encryptedRefreshToken)
     },
 
     logout: () => {
-        useAuthSessionStore.getState().clearAccessToken()
-        useAuthLocalStore.getState().clearRefreshToken()
+        useAccessTokenStore.getState().clearAccessToken()
+        useRefreshTokenStore.getState().clearRefreshToken()
     },
 
     getAccessToken: () => {
-        const accessToken = useAuthSessionStore.getState().accessToken
+        const accessToken = useAccessTokenStore.getState().accessToken
         if (!accessToken) {
             return null
         }
@@ -29,7 +29,7 @@ export const authFacade = {
     },
 
     getRefreshToken: () => {
-        const refreshToken = useAuthLocalStore.getState().refreshToken
+        const refreshToken = useRefreshTokenStore.getState().refreshToken
         if (!refreshToken) {
             return null
         }

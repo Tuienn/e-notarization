@@ -1,11 +1,13 @@
-export interface IAuthSessionState {
-    accessToken: string | null
-    setAccessToken: (accessToken: string) => void
-    clearAccessToken: () => void
+export interface IUser {
+    id: string
+    name: string
 }
 
-export interface IAuthLocalState {
-    refreshToken: string | null
-    setRefreshToken: (refreshToken: string) => void
-    clearRefreshToken: () => void
+export interface IAuthState {
+    user: IUser | null
+    isAuthenticated: boolean
+
+    setUser: (user: IUser) => void
+    clearUser: () => void
+    updateUser: (partial: Partial<IUser>) => void
 }

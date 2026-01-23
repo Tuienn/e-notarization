@@ -1,9 +1,9 @@
 import { create } from 'zustand'
-import { type IAuthLocalState } from './auth.types'
+import { type IRefreshTokenState } from './token.types'
 import { persist } from 'zustand/middleware'
 import { getDataStorage, removeDataStorage, saveDataStorage } from '../../lib/handleStorage'
 
-export const useAuthLocalStore = create<IAuthLocalState>()(
+export const useRefreshTokenStore = create<IRefreshTokenState>()(
     persist(
         (set) => ({
             refreshToken: null,
@@ -11,7 +11,7 @@ export const useAuthLocalStore = create<IAuthLocalState>()(
             clearRefreshToken: () => set({ refreshToken: null })
         }),
         {
-            name: 'auth-local',
+            name: 'accessToken',
             storage: {
                 getItem: (key) => getDataStorage(key, 'local'),
                 setItem: (key, value) => saveDataStorage(key, value, 'local'),

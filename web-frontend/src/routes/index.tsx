@@ -1,10 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
-import Box from '@mui/material/Box'
+import HomePage from '../components/pages/home'
 
 export const Route = createFileRoute('/')({
     component: HomePage
 })
-
-function HomePage() {
-    return <Box></Box>
-}
