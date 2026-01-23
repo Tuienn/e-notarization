@@ -1,6 +1,6 @@
 import Button from '@mui/material/Button'
 import { Link } from '@tanstack/react-router'
-import logo from '../../../assets/svg/logo.svg'
+import Logo from '../../../assets/svg/logo.svg?react'
 import IconButton from '@mui/material/IconButton'
 import NotificationsIcon from '@mui/icons-material/Notifications'
 import Divider from '@mui/material/Divider'
@@ -31,15 +31,7 @@ const TopNavbar: React.FC<Props> = (props) => {
                 alignItems={'center'}
             >
                 <Stack direction={'row'} alignItems={'center'} gap={1} flexGrow={1}>
-                    <img
-                        src={logo}
-                        alt='logo'
-                        style={{
-                            marginTop: 'auto',
-                            marginBottom: 'auto',
-                            height: '100%'
-                        }}
-                    />
+                    <Logo width={25} />
 
                     {mdScreen && (
                         <>
