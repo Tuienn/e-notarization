@@ -5,10 +5,10 @@ import { router } from './router'
 import ThemeProvider from './components/providers/ThemeProvider.tsx'
 import CssBaseline from '@mui/material/CssBaseline'
 import TanstackQueryProvider from './components/providers/TanstackQueryProvider.tsx'
-import NotificationProvider from './components/providers/NotificationProvider.tsx'
 import './assets/styles/index.css'
 
 import './i18n'
+import NotificationHost from './components/store/NotificationHost.tsx'
 
 createRoot(document.getElementById('root')!).render(
     <StrictMode>
@@ -16,7 +16,7 @@ createRoot(document.getElementById('root')!).render(
             <CssBaseline />
             <TanstackQueryProvider>
                 <RouterProvider router={router} />
-                <NotificationProvider />
+                <NotificationHost />
             </TanstackQueryProvider>
         </ThemeProvider>
     </StrictMode>
