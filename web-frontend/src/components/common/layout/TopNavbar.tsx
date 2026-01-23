@@ -22,7 +22,7 @@ const TopNavbar: React.FC<Props> = (props) => {
     const mdScreen = useMediaQuery(theme.breakpoints.up('md'))
 
     return (
-        <AppBar position='static' sx={{ backgroundColor: 'background.paper' }}>
+        <AppBar position='sticky' sx={{ backgroundColor: 'background.paper' }}>
             <Stack
                 sx={{ backgroundColor: 'background.paper' }}
                 className='container'
