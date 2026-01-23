@@ -3,7 +3,7 @@ import Alert from '@mui/material/Alert'
 import CircularProgress from '@mui/material/CircularProgress'
 import { useNotificationStore } from '../../stores/notification/notification.store'
 
-const NotificationProvider = () => {
+const NotificationHost = () => {
     const { open, message, severity, stopNotify } = useNotificationStore()
 
     const alertSeverity = severity === 'loading' ? 'info' : severity
@@ -34,4 +34,4 @@ const NotificationProvider = () => {
     )
 }
 
-export default NotificationProvider
+export default NotificationHost
