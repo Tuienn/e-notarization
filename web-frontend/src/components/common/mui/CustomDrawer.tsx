@@ -1,4 +1,5 @@
 import Box from '@mui/material/Box'
+import Divider from '@mui/material/Divider'
 import Drawer from '@mui/material/Drawer'
 import { useTheme } from '@mui/material/styles'
 import Typography from '@mui/material/Typography'
@@ -20,11 +21,6 @@ const CustomDrawer: React.FC<Props> = (props) => {
 
     return (
         <Drawer open={props.open} onClose={props.onClose} anchor={mdScreen ? 'right' : 'bottom'}>
-            {props.title && (
-                <Typography variant='h6' noWrap component='div'>
-                    {props.title}
-                </Typography>
-            )}
             <Box
                 p={2}
                 minWidth={300}
@@ -33,14 +29,21 @@ const CustomDrawer: React.FC<Props> = (props) => {
                 maxHeight={mdScreen ? '100vh' : '50vh'}
                 maxWidth={!mdScreen ? '100vw' : '50vw'}
             >
+                {props.title && (
+                    <>
+                        <Typography variant='h6' noWrap component='div'>
+                            {props.title}
+                        </Typography>
+                        <Divider sx={{ my: 1 }} />
+                    </>
+                )}
                 {props.children}
+                {props.footer && (
+                    <Box position={'absolute'} right={0} bottom={0} left={0} p={2}>
+                        {props.footer}
+                    </Box>
+                )}
             </Box>
-
-            {props.footer && (
-                <Box position={'absolute'} right={0} bottom={0} left={0} p={2}>
-                    {props.footer}
-                </Box>
-            )}
         </Drawer>
     )
 }

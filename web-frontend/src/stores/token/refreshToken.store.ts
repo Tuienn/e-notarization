@@ -11,7 +11,7 @@ export const useRefreshTokenStore = create<IRefreshTokenState>()(
             clearRefreshToken: () => set({ refreshToken: null })
         }),
         {
-            name: 'accessToken',
+            name: 'refreshToken',
             storage: {
                 getItem: (key) => getDataStorage(key, 'local'),
                 setItem: (key, value) => saveDataStorage(key, value, 'local'),

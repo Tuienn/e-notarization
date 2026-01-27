@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { useTranslation } from 'react-i18next'
-import { Link } from '@tanstack/react-router'
+import { Link, useNavigate } from '@tanstack/react-router'
 import Stack from '@mui/material/Stack'
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
@@ -15,10 +15,16 @@ import InputAdornment from '@mui/material/InputAdornment'
 import Visibility from '@mui/icons-material/Visibility'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
 import Logo from '../../../assets/svg/logo.svg?react'
+import { useMutation } from '@tanstack/react-query'
+import AuthService from '../../../services/nestJS/auth.service'
+import { tokenFacade } from '../../../stores/token/token.facade'
+import { useNotify } from '../../../stores/notification/notification.selector'
 
 const LoginPage: React.FC = () => {
     const { t } = useTranslation('auth')
     const [showPassword, setShowPassword] = useState(false)
+    const navigate = useNavigate()
+    const notify = useNotify()
 
     const loginSchema = useMemo(
         () =>
@@ -31,24 +37,23 @@ const LoginPage: React.FC = () => {
 
     type LoginFormData = z.infer<typeof loginSchema>
 
-    const {
-        register,
-        handleSubmit,
-        formState: { errors, isSubmitting }
-    } = useForm<LoginFormData>({
+    const form = useForm<LoginFormData>({
         resolver: zodResolver(loginSchema)
     })
 
-    const onSubmit = async (data: LoginFormData) => {
-        try {
-            console.log('Login data:', data)
-            // TODO: Integrate with auth service
-            // const response = await AuthService.login(data);
-            // Handle success
-        } catch (error) {
-            console.error('Login error:', error)
+    const mutationLogin = useMutation({
+        mutationFn: (data: LoginFormData) => AuthService.login(data.username, data.password),
+        onSuccess: (data) => {
+            notify(t('login.success.loginSuccess'), 'success')
+            tokenFacade.login(data.accessToken, data.refreshToken)
+            setTimeout(() => {
+                navigate({ to: '/' })
+            }, 500)
+        },
+        onError: () => {
+            notify(t('login.error.invalidCredentials'), 'error')
         }
-    }
+    })
 
     const handleTogglePasswordVisibility = () => {
         setShowPassword((prev) => !prev)
@@ -58,24 +63,26 @@ const LoginPage: React.FC = () => {
         <Dialog open={true} maxWidth='xs' fullWidth>
             <DialogContent>
                 <Stack spacing={3}>
-                    <Stack alignItems='center' spacing={2}>
-                        <Logo width={30} />
-                        <Stack spacing={1} alignItems='center'>
-                            <Typography variant='h4' component='h1' fontWeight='bold'>
-                                {t('login.title')}
-                            </Typography>
-                            <Typography variant='body2' color='text.secondary'>
-                                {t('login.subtitle')}
-                            </Typography>
-                        </Stack>
+                    <Stack alignItems='center' spacing={1}>
+                        <Logo width={30} onClick={() => navigate({ to: '/' })} style={{ cursor: 'pointer' }} />
+                        <Typography variant='h4' fontWeight='bold'>
+                            {t('login.title')}
+                        </Typography>
+                        <Typography variant='body2' color='text.secondary'>
+                            {t('login.subtitle')}
+                        </Typography>
                     </Stack>
 
-                    <Stack component='form' onSubmit={handleSubmit(onSubmit)} spacing={2} noValidate>
+                    <Stack
+                        component='form'
+                        onSubmit={form.handleSubmit((data) => mutationLogin.mutate(data))}
+                        spacing={2}
+                    >
                         <TextField
-                            {...register('username')}
+                            {...form.register('username')}
                             label={t('login.username')}
-                            error={!!errors.username}
-                            helperText={errors.username?.message || ''}
+                            error={!!form.formState.errors.username}
+                            helperText={form.formState.errors.username?.message || ''}
                             fullWidth
                             autoComplete='username'
                             autoFocus
@@ -83,11 +90,11 @@ const LoginPage: React.FC = () => {
                         />
 
                         <TextField
-                            {...register('password')}
+                            {...form.register('password')}
                             label={t('login.password')}
                             type={showPassword ? 'text' : 'password'}
-                            error={!!errors.password}
-                            helperText={errors.password?.message || ''}
+                            error={!!form.formState.errors.password}
+                            helperText={form.formState.errors.password?.message || ''}
                             fullWidth
                             autoComplete='current-password'
                             slotProps={{
@@ -108,7 +115,13 @@ const LoginPage: React.FC = () => {
                             required
                         />
 
-                        <Button type='submit' variant='contained' size='large' disabled={isSubmitting} fullWidth>
+                        <Button
+                            type='submit'
+                            variant='contained'
+                            size='large'
+                            loading={form.formState.isSubmitting}
+                            fullWidth
+                        >
                             {t('login.submit')}
                         </Button>
                     </Stack>

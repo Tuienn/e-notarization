@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { useTranslation } from 'react-i18next'
-import { Link } from '@tanstack/react-router'
+import { Link, useNavigate } from '@tanstack/react-router'
 import Stack from '@mui/material/Stack'
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
@@ -15,11 +15,17 @@ import InputAdornment from '@mui/material/InputAdornment'
 import Visibility from '@mui/icons-material/Visibility'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
 import Logo from '../../../assets/svg/logo.svg?react'
+import { useMutation } from '@tanstack/react-query'
+import AuthService from '../../../services/nestJS/auth.service'
+import { tokenFacade } from '../../../stores/token/token.facade'
+import { useNotify } from '../../../stores/notification/notification.selector'
 
 const RegisterPage: React.FC = () => {
     const { t } = useTranslation('auth')
     const [showPassword, setShowPassword] = useState(false)
     const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+    const navigate = useNavigate()
+    const notify = useNotify()
 
     const registerSchema = useMemo(
         () =>
@@ -44,24 +50,23 @@ const RegisterPage: React.FC = () => {
 
     type RegisterFormData = z.infer<typeof registerSchema>
 
-    const {
-        register,
-        handleSubmit,
-        formState: { errors, isSubmitting }
-    } = useForm<RegisterFormData>({
+    const form = useForm<RegisterFormData>({
         resolver: zodResolver(registerSchema)
     })
 
-    const onSubmit = async (data: RegisterFormData) => {
-        try {
-            console.log('Register data:', data)
-            // TODO: Integrate with auth service
-            // const response = await AuthService.register(data);
-            // Handle success
-        } catch (error) {
-            console.error('Register error:', error)
+    const mutationRegiser = useMutation({
+        mutationFn: (data: RegisterFormData) => AuthService.register(data.username, data.password),
+        onSuccess: (data) => {
+            notify(t('register.success.registerSuccess'), 'success')
+            tokenFacade.login(data.accessToken, data.refreshToken)
+            setTimeout(() => {
+                navigate({ to: '/' })
+            }, 500)
+        },
+        onError: () => {
+            notify(t('register.error.registerFailed'), 'error')
         }
-    }
+    })
 
     const handleTogglePasswordVisibility = () => {
         setShowPassword((prev) => !prev)
@@ -75,24 +80,27 @@ const RegisterPage: React.FC = () => {
         <Dialog open={true} maxWidth='xs' fullWidth>
             <DialogContent>
                 <Stack spacing={3}>
-                    <Stack alignItems='center' spacing={2}>
-                        <Logo width={30} />
-                        <Stack spacing={1} alignItems='center'>
-                            <Typography variant='h4' component='h1' fontWeight='bold'>
-                                {t('register.title')}
-                            </Typography>
-                            <Typography variant='body2' color='text.secondary'>
-                                {t('register.subtitle')}
-                            </Typography>
-                        </Stack>
+                    <Stack alignItems='center' spacing={1}>
+                        <Logo width={30} onClick={() => navigate({ to: '/' })} style={{ cursor: 'pointer' }} />
+                        <Typography variant='h4' fontWeight='bold'>
+                            {t('register.title')}
+                        </Typography>
+                        <Typography variant='body2' color='text.secondary'>
+                            {t('register.subtitle')}
+                        </Typography>
                     </Stack>
 
-                    <Stack component='form' onSubmit={handleSubmit(onSubmit)} spacing={2} noValidate>
+                    <Stack
+                        component='form'
+                        onSubmit={form.handleSubmit((data) => mutationRegiser.mutate(data))}
+                        spacing={2}
+                        noValidate
+                    >
                         <TextField
-                            {...register('username')}
+                            {...form.register('username')}
                             label={t('register.username')}
-                            error={!!errors.username}
-                            helperText={errors.username?.message || ''}
+                            error={!!form.formState.errors.username}
+                            helperText={form.formState.errors.username?.message || ''}
                             fullWidth
                             autoComplete='username'
                             autoFocus
@@ -100,11 +108,11 @@ const RegisterPage: React.FC = () => {
                         />
 
                         <TextField
-                            {...register('password')}
+                            {...form.register('password')}
                             label={t('register.password')}
                             type={showPassword ? 'text' : 'password'}
-                            error={!!errors.password}
-                            helperText={errors.password?.message || ''}
+                            error={!!form.formState.errors.password}
+                            helperText={form.formState.errors.password?.message || ''}
                             fullWidth
                             autoComplete='new-password'
                             slotProps={{
@@ -126,11 +134,11 @@ const RegisterPage: React.FC = () => {
                         />
 
                         <TextField
-                            {...register('confirmPassword')}
+                            {...form.register('confirmPassword')}
                             label={t('register.confirmPassword')}
                             type={showConfirmPassword ? 'text' : 'password'}
-                            error={!!errors.confirmPassword}
-                            helperText={errors.confirmPassword?.message || ''}
+                            error={!!form.formState.errors.confirmPassword}
+                            helperText={form.formState.errors.confirmPassword?.message || ''}
                             fullWidth
                             autoComplete='new-password'
                             slotProps={{
@@ -151,7 +159,13 @@ const RegisterPage: React.FC = () => {
                             required
                         />
 
-                        <Button type='submit' variant='contained' size='large' disabled={isSubmitting} fullWidth>
+                        <Button
+                            type='submit'
+                            variant='contained'
+                            size='large'
+                            loading={form.formState.isSubmitting}
+                            fullWidth
+                        >
                             {t('register.submit')}
                         </Button>
                     </Stack>
