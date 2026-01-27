@@ -8,7 +8,8 @@
         "build": "tsc -b && vite build",
         "lint": "eslint .",
         "preview": "vite preview",
-        "format": "prettier --write \"**/*.{js,ts,jsx,tsx,json,css,md}\" --ignore-path .prettierignore"
+        "format": "prettier --write \"**/*.{js,ts,jsx,tsx,json,css,md}\" --ignore-path .prettierignore",
+        "gen:routes": "tsr generate"
     },
     "dependencies": {
         "@emotion/react": "^11.14.0",
