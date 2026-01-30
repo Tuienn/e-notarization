@@ -16,7 +16,7 @@ import Visibility from '@mui/icons-material/Visibility'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
 import Logo from '../../../assets/svg/logo.svg?react'
 import { useMutation } from '@tanstack/react-query'
-import AuthService from '../../../services/nestJS/auth.service'
+import AuthService from '../../../services/gin/auth.service'
 import { tokenFacade } from '../../../stores/token/token.facade'
 import { useNotify } from '../../../stores/notification/notification.selector'
 

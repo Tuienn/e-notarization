@@ -10,17 +10,13 @@ interface Props {
 const ThemeProvider = (props: Props) => {
     const theme = createTheme({
         cssVariables: true,
-        colorSchemes: {
-            light: true,
-            dark: true
-        },
         typography: {
             fontFamily: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Roboto', 'sans-serif'].join(','),
             button: {
                 textTransform: 'none', // Không tự động viết hoa
                 fontWeight: 500
             }
-        }
+        },
     })
 
     return (

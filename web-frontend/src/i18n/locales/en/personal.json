@@ -1,0 +1,9 @@
+{
+    "title": "Personal Information",
+    "name": "Name",
+    "email": "Email",
+    "loading": "Loading...",
+    "error": {
+        "loadFailed": "Failed to load user profile"
+    }
+}
