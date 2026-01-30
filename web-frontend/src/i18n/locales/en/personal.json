@@ -1,0 +1,10 @@
+{
+    "title": "Personal Information",
+    "fields": {
+        "name": "Name",
+        "email": "Email"
+    },
+    "error": {
+        "loadFailed": "Unable to load user information"
+    }
+}

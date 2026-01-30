@@ -3,3 +3,8 @@ export interface INavbarItem {
     icon: React.ReactNode
     hrefTo: string
 }
+
+export interface IUser {
+    name: string
+    email: string
+}

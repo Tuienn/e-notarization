@@ -1,0 +1,223 @@
+---
+description: Material UI (MUI) implementation guidelines and component usage
+globs: "**/*.{ts,tsx}"
+alwaysApply: false
+---
+
+# Material UI (MUI) Guidelines
+
+This project uses **Material UI (MUI)** as the primary UI library. Follow these guidelines for consistent implementation.
+
+## Core Rules
+
+### Import Convention
+
+**CRITICAL:** Always use deep imports to specific modules, never import from the root package.
+
+```typescript
+// ❌ DON'T
+import { Button, Box, Typography } from '@mui/material'
+
+// ✅ DO
+import Button from '@mui/material/Button'
+import Box from '@mui/material/Box'
+import Typography from '@mui/material/Typography'
+```
+
+This follows the project's `autoImportSpecifierExcludeRegexes: ["^@mui/[^/]+$"]` configuration.
+
+### Layout Components
+
+**Use MUI components instead of HTML tags:**
+
+```typescript
+// ❌ DON'T
+<div style={{ padding: '16px' }}>
+    <div style={{ display: 'flex', gap: '8px' }}>
+        {/* content */}
+    </div>
+</div>
+
+// ✅ DO
+<Box p={2}>
+    <Stack spacing={1}>
+        {/* content */}
+    </Stack>
+</Box>
+```
+
+**Key principles:**
+- Replace `<div>` with `<Box>` or `<Stack>`
+- Use MUI System Props (e.g., `p={2}`, `m={1}`) instead of inline styles
+- Prefer `<Stack>` for flexbox layouts over `<Box display="flex">`
+- Prioritize MUI components over raw HTML tags
+
+## Available Components
+
+### 🔹 SURFACES
+
+- **Accordion** - Expandable/collapsible content sections
+- **App Bar** - Top navigation bar
+- **Card** - Independent content container
+- **Paper** - Surface with elevation
+
+### 🔹 NAVIGATION
+
+- **Bottom Navigation** - Primary navigation at bottom (mobile-first)
+- **Breadcrumbs** - Hierarchical path display
+- **Drawer** - Side menu that slides from edge
+- **Link** - Internal navigation or external links
+- **Menu** - Action list triggered from button
+- **Pagination** - Navigate between data pages
+- **Speed Dial** - Quick action floating button
+- **Stepper** - Step-by-step progress indicator
+- **Tabs** - Switch between content groups
+
+### 🔹 LAYOUT
+
+- **Box** - Versatile wrapper, replaces `<div>`
+- **Container** - Content width limiter
+- **Grid** - 2D grid layout system
+- **Stack** - 1D layout (row/column) with automatic spacing
+- **Image List** - Display list of images
+
+### 🔹 INPUTS
+
+- **Autocomplete** - Input with search suggestions
+- **Button** - Action trigger
+- **Button Group** - Related buttons grouped together
+- **Checkbox** - Multiple value selection
+- **FAB (Floating Action Button)** - Prominent floating action button
+- **Radio Group** - Single value selection
+- **Rating** - Star rating input
+- **Select** - Dropdown value picker
+- **Slider** - Drag to select value
+- **Switch** - Toggle on/off state
+- **Text Field** - Versatile text input
+- **Toggle Button** - On/off state button
+
+### 🔹 DATA DISPLAY
+
+- **Avatar** - User profile image
+- **Badge** - Status/count label overlay
+- **Chip** - Tag or label display
+- **Divider** - Visual separator line
+- **Icons** - SVG icon set
+- **List** - Vertical list display
+- **Table** - Tabular data display
+- **Tooltip** - Hover hint
+- **Typography** - Text display and formatting
+
+### 🔹 UTILS
+
+- **useMediaQuery** - Hook for breakpoint/media query checks
+
+## Component Usage Patterns
+
+### Text Field (Preferred Input)
+
+`TextField` is extremely versatile. Use it instead of:
+- `Input`
+- `InputBase`
+- `OutlinedInput`
+- `FilledInput`
+- `StandardInput`
+- `Textarea` (use `TextField` with `multiline` prop)
+
+```typescript
+// Single-line input
+<TextField label="Username" />
+
+// Multi-line input
+<TextField label="Description" multiline rows={4} />
+```
+
+### Layout with Stack
+
+```typescript
+// Vertical stack with spacing
+<Stack spacing={2}>
+    <Button>First</Button>
+    <Button>Second</Button>
+    <Button>Third</Button>
+</Stack>
+
+// Horizontal stack with spacing
+<Stack direction="row" spacing={1}>
+    <Chip label="Tag 1" />
+    <Chip label="Tag 2" />
+</Stack>
+```
+
+### System Props
+
+Use MUI's system props for styling:
+
+```typescript
+<Box
+    p={2}           // padding: theme.spacing(2)
+    m={1}           // margin: theme.spacing(1)
+    bgcolor="primary.main"
+    borderRadius={2}
+    display="flex"
+    alignItems="center"
+>
+    {/* content */}
+</Box>
+```
+
+## Custom Wrappers
+
+Place custom MUI component wrappers in `src/components/common/mui/`:
+
+```typescript
+// src/components/common/mui/CustomDrawer.tsx
+import Drawer from '@mui/material/Drawer'
+
+export const CustomDrawer = () => {
+    // Custom implementation
+}
+```
+
+## Examples
+
+### Form Layout
+
+```typescript
+<Box component="form" p={3}>
+    <Stack spacing={3}>
+        <Typography variant="h4">Login</Typography>
+        <TextField label="Username" fullWidth />
+        <TextField label="Password" type="password" fullWidth />
+        <Button variant="contained" type="submit" fullWidth>
+            Sign In
+        </Button>
+    </Stack>
+</Box>
+```
+
+### Card with Content
+
+```typescript
+<Card>
+    <Box p={2}>
+        <Stack spacing={2}>
+            <Typography variant="h6">Card Title</Typography>
+            <Divider />
+            <Typography variant="body2">Card content goes here</Typography>
+            <Box display="flex" justifyContent="flex-end">
+                <Button size="small">Action</Button>
+            </Box>
+        </Stack>
+    </Box>
+</Card>
+```
+
+## Checklist
+
+- [ ] Use deep imports (`@mui/material/Button`)
+- [ ] Replace `<div>` with `<Box>` or `<Stack>`
+- [ ] Use System Props instead of inline styles
+- [ ] Prefer `<Stack>` for flex layouts
+- [ ] Use `TextField` for all text inputs
+- [ ] Avoid deprecated or unlisted components

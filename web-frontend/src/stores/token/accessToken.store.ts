@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import type { IAccessTokenState } from './token.types'
+import { type IAccessTokenState } from './token.types'
 import { persist } from 'zustand/middleware'
 import { getDataStorage, removeDataStorage, saveDataStorage } from '../../lib/handleStorage'
 
@@ -11,7 +11,7 @@ export const useAccessTokenStore = create<IAccessTokenState>()(
             clearAccessToken: () => set({ accessToken: null })
         }),
         {
-            name: 'refreshToken',
+            name: 'accessToken',
             storage: {
                 getItem: (key) => getDataStorage(key, 'session'),
                 setItem: (key, value) => saveDataStorage(key, value, 'session'),
