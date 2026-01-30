@@ -1,9 +1,10 @@
 {
     "title": "Personal Information",
-    "name": "Name",
-    "email": "Email",
-    "loading": "Loading...",
+    "fields": {
+        "name": "Name",
+        "email": "Email"
+    },
     "error": {
-        "loadFailed": "Failed to load user profile"
+        "loadFailed": "Unable to load user information"
     }
 }
