@@ -13,7 +13,7 @@ const API = axios.create({
     }
 })
 
-export const nestApiService = async <T = any>(url: string, options?: RequestInit, _retried = false): Promise<T> => {
+export const ginApiService = async <T = any>(url: string, options?: RequestInit, _retried = false): Promise<T> => {
     const token = tokenFacade.getAccessToken()
 
     // Prepare headers
@@ -36,8 +36,8 @@ export const nestApiService = async <T = any>(url: string, options?: RequestInit
                 options?.body instanceof FormData
                     ? options.body
                     : options?.body
-                      ? JSON.parse(options.body as string)
-                      : undefined
+                        ? JSON.parse(options.body as string)
+                        : undefined
         })
 
         return (response.data ?? (undefined as unknown)) as T
@@ -85,13 +85,13 @@ export const nestApiService = async <T = any>(url: string, options?: RequestInit
                 tokenFacade.login(refreshData.data.accessToken, refreshData.data.refreshToken)
 
                 // Retry lại request gốc đúng 1 lần với token mới
-                return nestApiService<T>(url, options, true)
+                return ginApiService<T>(url, options, true)
             } catch (refreshError) {
                 tokenFacade.logout()
                 throw new Error(
                     axios.isAxiosError(refreshError)
                         ? refreshError.response?.data?.message ||
-                              `Refresh token thất bại (HTTP ${refreshError.response?.status})`
+                        `Refresh token thất bại (HTTP ${refreshError.response?.status})`
                         : 'Refresh token thất bại'
                 )
             }

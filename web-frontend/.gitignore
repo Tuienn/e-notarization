@@ -34,3 +34,6 @@ bun.lockb
 # Visualizer
 stats.html
 
+# Antigravity folder agent
+.agent/
+

@@ -24,7 +24,6 @@ const TopNavbar: React.FC<Props> = (props) => {
     return (
         <AppBar position='sticky' sx={{ backgroundColor: 'background.paper' }}>
             <Stack
-                sx={{ backgroundColor: 'background.paper' }}
                 className='container'
                 direction={'row'}
                 py={1}
