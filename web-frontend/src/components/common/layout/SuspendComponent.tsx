@@ -1,5 +1,5 @@
 import Stack from '@mui/material/Stack'
-import SvgLoading from '../../../assets/svg/loading.svg?react'
+import SvgLoading from '../../../assets/svg/icons/loading.svg?react'
 
 const SuspendComponent: React.FC = () => {
     return (

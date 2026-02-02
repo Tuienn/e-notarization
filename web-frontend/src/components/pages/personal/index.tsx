@@ -2,9 +2,11 @@ import { useQuery } from '@tanstack/react-query'
 import { useTranslation } from 'react-i18next'
 import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
-import CircularProgress from '@mui/material/CircularProgress'
 import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
+import Skeleton from '@mui/material/Skeleton'
+import Alert from '@mui/material/Alert'
+import Paper from '@mui/material/Paper'
 import AuthService from '../../../services/gin/auth.service'
 
 const PersonalPage: React.FC = () => {
@@ -16,20 +18,20 @@ const PersonalPage: React.FC = () => {
         retry: 1
     })
 
-    if (queryUserProfile.isLoading) {
+    if (queryUserProfile.isPending) {
         return (
-            <Box display='flex' justifyContent='center' alignItems='center' minHeight='400px'>
-                <CircularProgress />
-            </Box>
+            <Paper sx={{ p: 2 }}>
+                <Stack spacing={1}>
+                    <Skeleton width='40%' height={40} />
+                    <Skeleton width='60%' height={40} />
+                    <Skeleton width='70%' height={40} />
+                </Stack>
+            </Paper>
         )
     }
 
     if (queryUserProfile.isError) {
-        return (
-            <Box display='flex' justifyContent='center' alignItems='center' minHeight='400px'>
-                <Typography color='error'>{t('error.loadFailed')}</Typography>
-            </Box>
-        )
+        return <Alert severity='error'>{t('error.loadFailed')}</Alert>
     }
 
     const user = queryUserProfile.data

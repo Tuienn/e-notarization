@@ -9,9 +9,7 @@
         "lint": "eslint .",
         "preview": "vite preview",
         "format": "prettier --write \"**/*.{js,ts,jsx,tsx,json,css,md}\" --ignore-path .prettierignore",
-        "gen:routes": "tsr generate",
-        "agent:copy:windows": "powershell -Command \"Copy-Item -Path .cursor -Destination .agent -Recurse -Force\"",
-        "agent:copy:linux": "cp -r .cursor .agent"
+        "gen:routes": "tsr generate"
     },
     "dependencies": {
         "@emotion/react": "^11.14.0",

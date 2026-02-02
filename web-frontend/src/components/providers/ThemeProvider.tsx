@@ -7,16 +7,22 @@ interface Props {
     children: ReactNode
 }
 
-const ThemeProvider = (props: Props) => {
+const ThemeProvider: React.FC<Props> = (props) => {
     const theme = createTheme({
-        cssVariables: true,
+        cssVariables: {
+            colorSchemeSelector: 'data-mui-color-scheme'
+        },
+        colorSchemes: {
+            light: true,
+            dark: true
+        },
         typography: {
             fontFamily: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Roboto', 'sans-serif'].join(','),
             button: {
-                textTransform: 'none', // Không tự động viết hoa
+                textTransform: 'none',
                 fontWeight: 500
             }
-        },
+        }
     })
 
     return (

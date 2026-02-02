@@ -84,8 +84,8 @@ const LoginPage: React.FC = () => {
     return (
         <form onSubmit={form.handleSubmit(handleSubmit)}>
             {/* form fields */}
-            <Button 
-                type="submit" 
+            <Button
+                type="submit"
                 loading={mutationLogin.isPending}
             >
                 {t('login.submit')} {/* Also use t() for button text */}
@@ -96,6 +96,7 @@ const LoginPage: React.FC = () => {
 ```
 
 **Corresponding i18n file:**
+
 ```json
 // src/i18n/locales/en/auth.json
 {
@@ -132,7 +133,7 @@ const Personal: React.FC = () => {
         retry: 1
     })
 
-    if (queryUserProfile.isLoading) {
+    if (queryUserProfile.isPending) {
         return <CircularProgress />
     }
 
@@ -156,6 +157,7 @@ const Personal: React.FC = () => {
 **This project uses i18n (react-i18next).** All notification messages MUST use the `useTranslation` hook and `t()` function.
 
 **Pattern:**
+
 1. Import `useTranslation` from `react-i18next`
 2. Call `const { t } = useTranslation('namespace')` at component start
 3. Use `t('key.path')` for all notification messages
@@ -234,7 +236,7 @@ const DocumentList: React.FC = () => {
 
     // Mutation for create
     const mutationCreate = useMutation({
-        mutationFn: ({ title, content }: { title: string; content: string }) => 
+        mutationFn: ({ title, content }: { title: string; content: string }) =>
             DocumentService.createDocument(title, content),
         onSuccess: () => {
             notify(t('create.success'), 'success') // Use t()
@@ -247,7 +249,7 @@ const DocumentList: React.FC = () => {
 
     // Mutation for update
     const mutationUpdate = useMutation({
-        mutationFn: ({ id, data }: { id: string; data: Partial<IDocument> }) => 
+        mutationFn: ({ id, data }: { id: string; data: Partial<IDocument> }) =>
             DocumentService.updateDocument(id, data),
         onSuccess: () => {
             notify(t('update.success'), 'success') // Use t()
@@ -282,7 +284,7 @@ const DocumentList: React.FC = () => {
         mutationDelete.mutate(id)
     }
 
-    if (queryDocuments.isLoading) return <CircularProgress />
+    if (queryDocuments.isPending) return <CircularProgress />
     if (queryDocuments.isError) return <Typography color="error">Error loading documents</Typography>
 
     return (
@@ -307,6 +309,7 @@ const DocumentList: React.FC = () => {
 ```
 
 **Corresponding i18n file:**
+
 ```json
 // src/i18n/locales/en/document.json
 {
@@ -379,8 +382,8 @@ const UploadPage: React.FC = () => {
 
     return (
         <div>
-            <input 
-                type="file" 
+            <input
+                type="file"
                 onChange={handleFileChange}
                 disabled={mutationUpload.isPending}
             />
@@ -391,6 +394,7 @@ const UploadPage: React.FC = () => {
 ```
 
 **Corresponding i18n file:**
+
 ```json
 // src/i18n/locales/en/upload.json
 {
@@ -423,9 +427,7 @@ export default class DocumentService {
         if (filters.startDate) queryParams.append('startDate', filters.startDate)
         if (filters.endDate) queryParams.append('endDate', filters.endDate)
 
-        const res = await ginApiService<{ data: IDocument[] }>(
-            `${this.BASE_URL}?${queryParams.toString()}`
-        )
+        const res = await ginApiService<{ data: IDocument[] }>(`${this.BASE_URL}?${queryParams.toString()}`)
         return res.data
     }
 }
