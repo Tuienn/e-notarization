@@ -4,6 +4,10 @@
     padding-right: 1rem;
 }
 
+.children-main-layout {
+    padding-top: 1rem;
+}
+
 /* sm ≥ 640px */
 @media (min-width: 640px) {
     .container {
@@ -11,6 +15,9 @@
         max-width: none;
         padding-left: 1.5rem; /* px-6 */
         padding-right: 1.5rem;
+    }
+    .children-main-layout {
+        padding-bottom: 3.5rem;
     }
 }
 
@@ -22,6 +29,9 @@
         max-width: 768px;
         padding-left: 2rem; /* px-8 */
         padding-right: 2rem;
+    }
+    .children-main-layout {
+        padding-bottom: 3.5rem;
     }
 }
 

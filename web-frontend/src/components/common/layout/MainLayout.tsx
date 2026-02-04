@@ -5,10 +5,9 @@ import BottomNavbar from './BottomNavbar'
 import type { INavbarItem } from '../../../types/common'
 import { useTranslation } from 'react-i18next'
 import HomeIcon from '@mui/icons-material/Home'
-import { useTheme } from '@mui/material/styles'
-import useMediaQuery from '@mui/material/useMediaQuery'
 import PersonIcon from '@mui/icons-material/Person'
-import { useRouterState } from '@tanstack/react-router'
+import { useLocation } from '@tanstack/react-router'
+import useBreakpoint from '../../../hooks/useBreakpoint'
 
 interface Props {
     children: ReactNode
@@ -16,11 +15,9 @@ interface Props {
 
 const MainLayout: React.FC<Props> = (props) => {
     const { t } = useTranslation('layout')
-    const theme = useTheme()
-    const mdScreen = useMediaQuery(theme.breakpoints.up('md'))
-
-    const routerState = useRouterState()
-    const activeHrefTo = routerState.location.pathname
+    const breakpoint = useBreakpoint()
+    const location = useLocation()
+    const activeHrefTo = location.pathname
 
     const navbarItems: INavbarItem[] = [
         { label: t('home'), hrefTo: '/', icon: <HomeIcon /> },
@@ -33,11 +30,11 @@ const MainLayout: React.FC<Props> = (props) => {
 
     return (
         <Box>
-            <TopNavbar items={navbarItems} activeHrefTo={activeHrefTo} />
-            <Box className='container' pt={2}>
-                {props.children}
-            </Box>
-            {!mdScreen && <BottomNavbar items={navbarItems} activeHrefTo={activeHrefTo} />}
+            {(breakpoint.md || ['/', '/personal'].includes(activeHrefTo)) && (
+                <TopNavbar items={navbarItems} activeHrefTo={activeHrefTo} />
+            )}
+            {props.children}
+            {!breakpoint.md && <BottomNavbar items={navbarItems} activeHrefTo={activeHrefTo} />}
         </Box>
     )
 }

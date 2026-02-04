@@ -22,6 +22,15 @@ const ThemeProvider: React.FC<Props> = (props) => {
                 textTransform: 'none',
                 fontWeight: 500
             }
+        },
+        breakpoints: {
+            values: {
+                xs: 0,
+                sm: 640,
+                md: 768,
+                lg: 1024,
+                xl: 1280
+            }
         }
     })
 

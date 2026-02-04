@@ -61,7 +61,7 @@ src/
 ### General Rules
 
 - **Function Style:** **MANDATORY** use Arrow Functions for all components and functions
-- **Component Props:** Use interface for props definition with `React.FC<Props>` typing
+- **Component Props:** Use interface for props definition with `React.FC<Props>` typing and use in code is object `props.`
 - **Type Naming Convention:**
     - Types/interfaces in `src/types/` folder **MUST** be prefixed with `I` (e.g., `IUser`, `INavbarItem`)
     - Component Props interfaces do NOT need `I` prefix (just `Props`)
