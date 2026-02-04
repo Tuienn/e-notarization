@@ -14,7 +14,7 @@ import IconButton from '@mui/material/IconButton'
 import InputAdornment from '@mui/material/InputAdornment'
 import Visibility from '@mui/icons-material/Visibility'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
-import Logo from '../../../assets/svg/logo.svg?react'
+import Logo from '../../../assets/svg/icons/logo.svg?react'
 import { useMutation } from '@tanstack/react-query'
 import AuthService from '../../../services/gin/auth.service'
 import { tokenFacade } from '../../../stores/token/token.facade'
@@ -33,13 +33,15 @@ const RegisterPage: React.FC = () => {
                 .object({
                     username: z
                         .string()
+                        .trim()
                         .min(1, t('register.error.usernameRequired'))
                         .min(3, t('register.error.usernameMinLength')),
                     password: z
                         .string()
+                        .trim()
                         .min(1, t('register.error.passwordRequired'))
                         .min(6, t('register.error.passwordMinLength')),
-                    confirmPassword: z.string().min(1, t('register.error.confirmPasswordRequired'))
+                    confirmPassword: z.string().trim().min(1, t('register.error.confirmPasswordRequired'))
                 })
                 .refine((data) => data.password === data.confirmPassword, {
                     message: t('register.error.passwordsNotMatch'),

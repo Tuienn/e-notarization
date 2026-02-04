@@ -92,7 +92,7 @@ const Component: React.FC = () => {
         retry: 1
     })
 
-    if (queryUserProfile.isLoading) return <CircularProgress />
+    if (queryUserProfile.isPending) return <CircularProgress />
     if (queryUserProfile.isError) return <Error />
 
     const user = queryUserProfile.data

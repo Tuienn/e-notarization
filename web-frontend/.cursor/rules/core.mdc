@@ -1,5 +1,4 @@
 ---
-description: Core project directives - tech stack, structure, and coding conventions
 alwaysApply: true
 ---
 
@@ -63,20 +62,20 @@ src/
 
 - **Function Style:** **MANDATORY** use Arrow Functions for all components and functions
 - **Component Props:** Use interface for props definition with `React.FC<Props>` typing
-- **Type Naming Convention:** 
-  - Types/interfaces in `src/types/` folder **MUST** be prefixed with `I` (e.g., `IUser`, `INavbarItem`)
-  - Component Props interfaces do NOT need `I` prefix (just `Props`)
+- **Type Naming Convention:**
+    - Types/interfaces in `src/types/` folder **MUST** be prefixed with `I` (e.g., `IUser`, `INavbarItem`)
+    - Component Props interfaces do NOT need `I` prefix (just `Props`)
 - **Comments:** Minimize. Code must be self-documenting
 - **Console:** Console logs must NOT contain emojis
 - **State Management:**
-  - Only use Zustand for global state
-  - **ABSOLUTELY FORBIDDEN** to use React Context Provider for state management
+    - Only use Zustand for global state
+    - **ABSOLUTELY FORBIDDEN** to use React Context Provider for state management
 
 ### API & Data Fetching (TanStack Query)
 
 **Naming Convention:**
 
-- **Query:** `useQuery` + `[Purpose]` (e.g., `useQueryUserProfile`)
+- **Query:** `useQuery` + `[Purpose]` (e.g., `useQueryUserProfile`), use `isPending` instead of `isLoading`
 - **Mutation:** `useMutation` + `[Purpose]` (e.g., `useMutationLogin`)
 
 **Implementation:**
@@ -97,11 +96,12 @@ const MyContext = React.createContext()
 function MyComponent() {}
 
 // Props without interface
-const MyComponent = ({ title, count }) => { }
+const MyComponent = ({ title, count }) => {}
 
 // Types without I prefix in types folder
 // src/types/common.ts
-export interface User {  // Missing I prefix
+export interface User {
+    // Missing I prefix
     name: string
 }
 

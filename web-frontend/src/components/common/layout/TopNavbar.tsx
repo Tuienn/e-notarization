@@ -1,6 +1,6 @@
 import Button from '@mui/material/Button'
 import { Link } from '@tanstack/react-router'
-import Logo from '../../../assets/svg/logo.svg?react'
+import Logo from '../../../assets/svg/icons/logo.svg?react'
 import IconButton from '@mui/material/IconButton'
 import NotificationsIcon from '@mui/icons-material/Notifications'
 import Divider from '@mui/material/Divider'

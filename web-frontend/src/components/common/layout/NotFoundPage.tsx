@@ -2,7 +2,7 @@ import Button from '@mui/material/Button'
 import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
 import { Link, useRouter } from '@tanstack/react-router'
-import NotFoundSvg from '../../../assets/svg/404.svg' // import SVG như image asset
+import NotFoundSvg from '../../../assets/svg/illustrations/404.svg' // import SVG như image asset
 import { useTranslation } from 'react-i18next'
 
 const NotFoundPage: React.FC = () => {

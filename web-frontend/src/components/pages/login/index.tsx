@@ -14,7 +14,7 @@ import IconButton from '@mui/material/IconButton'
 import InputAdornment from '@mui/material/InputAdornment'
 import Visibility from '@mui/icons-material/Visibility'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
-import Logo from '../../../assets/svg/logo.svg?react'
+import Logo from '../../../assets/svg/icons/logo.svg?react'
 import { useMutation } from '@tanstack/react-query'
 import AuthService from '../../../services/gin/auth.service'
 import { tokenFacade } from '../../../stores/token/token.facade'
@@ -29,8 +29,8 @@ const LoginPage: React.FC = () => {
     const loginSchema = useMemo(
         () =>
             z.object({
-                username: z.string().min(1, t('login.error.usernameRequired')),
-                password: z.string().min(1, t('login.error.passwordRequired'))
+                username: z.string().trim().min(1, t('login.error.usernameRequired')),
+                password: z.string().trim().min(1, t('login.error.passwordRequired'))
             }),
         [t]
     )
