@@ -26,6 +26,7 @@ const ResponsiveButton: React.FC<Props> = (props) => {
             disabled={props.disabled}
             size={props.size}
             onClick={props.onClick}
+            loading={props.loading}
             {...props.iconButtonProps}
         >
             {props.icon}

@@ -1,5 +1,5 @@
 ---
-alwaysApply: true
+trigger: glob
 ---
 
 # E-Notarization Web Frontend - Core Directives

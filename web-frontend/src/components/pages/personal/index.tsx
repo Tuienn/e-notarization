@@ -17,7 +17,6 @@ const PersonalPage: React.FC = () => {
     //                 <Skeleton width='60%' height={40} />
     //                 <Skeleton width='70%' height={40} />
     //             </Stack>
-    //         </Paper>
     //     )
     // }
 
@@ -27,11 +26,7 @@ const PersonalPage: React.FC = () => {
 
     // const user = queryUserProfile.data
 
-    return (
-        <div className='container children-main-layout'>
-            Test personal page
-        </div>
-    )
+    return <div className='container children-main-layout'>Test personal page</div>
 }
 
 export default PersonalPage
