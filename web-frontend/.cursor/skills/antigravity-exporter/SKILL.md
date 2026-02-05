@@ -51,11 +51,11 @@ Converts Cursor rule files to Antigravity format:
 
 ### Frontmatter Conversion
 
-| Cursor Format        | Antigravity Format                 |
-| -------------------- | ---------------------------------- |
-| `alwaysApply: true`  | `trigger: glob`                    |
+| Cursor Format        | Antigravity Format                                   |
+| -------------------- | ---------------------------------------------------- |
+| `alwaysApply: true`  | `trigger: always_on`                                 |
 | `alwaysApply: false` | `trigger: glob` or `trigger: manual` (auto-detected) |
-| (no field)           | `trigger: manual`                  |
+| (no field)           | `trigger: manual`                                    |
 
 ### Smart Trigger Detection
 
@@ -112,11 +112,11 @@ Successful: 5
 Failed: 0
 
 Exported rules:
-   - core.mdc -> core.md (trigger: glob)
+   - core.mdc -> core.md (trigger: always_on)
    - mui.mdc -> mui.md (trigger: glob, globs: *.tsx)
    - i18n.mdc -> i18n.md (trigger: glob, globs: *.tsx)
    - svg.mdc -> svg.md (trigger: glob, globs: *.tsx)
-   - skeleton-query.mdc -> skeleton-query.md (trigger: manual)
+   - skeleton-query.mdc -> skeleton-query.md (trigger: glob, globs: *.tsx)
 ============================================================
 ```
 

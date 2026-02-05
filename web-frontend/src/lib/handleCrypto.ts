@@ -1,9 +1,9 @@
-import AES from 'crypto-js/aes'
+import CryptoJS from 'crypto-js'
 import { SECRET_KEY } from '../constants/env.config'
 
 export const encrypt = (text: string) => {
     try {
-        return AES.encrypt(text, SECRET_KEY).toString()
+        return CryptoJS.AES.encrypt(text, SECRET_KEY).toString()
     } catch (error) {
         console.error('Encryption error:', error)
         return null
@@ -12,7 +12,7 @@ export const encrypt = (text: string) => {
 
 export const decrypt = (encryptedText: string) => {
     try {
-        const bytes = AES.decrypt(encryptedText, SECRET_KEY)
+        const bytes = CryptoJS.AES.decrypt(encryptedText, SECRET_KEY)
         return bytes.toString(CryptoJS.enc.Utf8)
     } catch (error) {
         console.error('Decryption error:', error)

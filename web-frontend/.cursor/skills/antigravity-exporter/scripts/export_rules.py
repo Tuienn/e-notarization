@@ -58,9 +58,9 @@ class RuleExporter:
         """Determine the best trigger mode for Antigravity"""
         always_apply = frontmatter.get('alwaysApply', False)
         
-        # If alwaysApply is true, use glob trigger (Antigravity doesn't have 'auto')
+        # If alwaysApply is true, use always_on trigger
         if always_apply:
-            return {"trigger": "glob"}
+            return {"trigger": "always_on"}
         
         # Analyze content for file-specific patterns
         content_lower = content.lower()

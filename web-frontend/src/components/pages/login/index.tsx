@@ -119,7 +119,7 @@ const LoginPage: React.FC = () => {
                             type='submit'
                             variant='contained'
                             size='large'
-                            loading={form.formState.isSubmitting}
+                            loading={form.formState.isSubmitting || mutationLogin.isPending}
                             fullWidth
                         >
                             {t('login.submit')}

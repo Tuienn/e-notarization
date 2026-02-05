@@ -1,7 +1,5 @@
-import { useTranslation } from 'react-i18next'
-
 const PersonalPage: React.FC = () => {
-    const { t } = useTranslation('personal')
+    // const { t } = useTranslation('personal')
 
     // const queryUserProfile = useQuery({
     //     queryKey: ['userProfile'],

@@ -165,7 +165,7 @@ const RegisterPage: React.FC = () => {
                             type='submit'
                             variant='contained'
                             size='large'
-                            loading={form.formState.isSubmitting}
+                            loading={form.formState.isSubmitting || mutationRegiser.isPending}
                             fullWidth
                         >
                             {t('register.submit')}
