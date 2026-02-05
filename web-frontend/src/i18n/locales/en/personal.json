@@ -1,10 +1,27 @@
 {
-    "title": "Personal Information",
+    "title": "Personal information",
     "fields": {
         "name": "Name",
         "email": "Email"
     },
     "error": {
         "loadFailed": "Unable to load user information"
+    },
+    "settings": {
+        "account": {
+            "title": "Account",
+            "profile": "Profile information",
+            "changePassword": "Change password"
+        },
+        "preferences": {
+            "title": "Preferences",
+            "notifications": "Notifications",
+            "darkMode": "Dark mode",
+            "language": "Language"
+        },
+        "logout": "Logout"
+    },
+    "logout": {
+        "success": "Logout successful"
     }
 }

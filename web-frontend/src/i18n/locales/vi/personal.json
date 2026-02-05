@@ -1,0 +1,27 @@
+{
+    "title": "Thông tin cá nhân",
+    "fields": {
+        "name": "Tên",
+        "email": "Email"
+    },
+    "error": {
+        "loadFailed": "Không thể tải thông tin người dùng"
+    },
+    "settings": {
+        "account": {
+            "title": "Tài khoản",
+            "profile": "Thông tin cá nhân",
+            "changePassword": "Đổi mật khẩu"
+        },
+        "preferences": {
+            "title": "Tùy chọn",
+            "notifications": "Thông báo",
+            "darkMode": "Chế độ tối",
+            "language": "Ngôn ngữ"
+        },
+        "logout": "Đăng xuất"
+    },
+    "logout": {
+        "success": "Đăng xuất thành công"
+    }
+}
