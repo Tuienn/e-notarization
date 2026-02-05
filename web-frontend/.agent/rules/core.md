@@ -1,5 +1,5 @@
 ---
-alwaysApply: true
+trigger: always_on
 ---
 
 # E-Notarization Web Frontend - Core Directives
@@ -71,11 +71,6 @@ src/
 - **State Management:**
     - Only use Zustand for global state
     - **ABSOLUTELY FORBIDDEN** to use React Context Provider for state management
-- **Storage Handling:**
-    - **MANDATORY** use utilities from `src/lib/handleStorage.ts` for all storage operations
-    - **ABSOLUTELY FORBIDDEN** to use `localStorage` or `sessionStorage` directly
-    - Use `saveDataStorage()`, `getDataStorage()`, and `removeDataStorage()` functions
-    - Benefits: Centralized error handling, automatic JSON parsing/stringification, consistent API
 
 ### API & Data Fetching (TanStack Query)
 
@@ -113,11 +108,6 @@ export interface User {
 
 // Importing from root package
 import { Button, Box } from '@mui/material'
-
-// Direct localStorage usage
-const token = localStorage.getItem('token')
-localStorage.setItem('user', JSON.stringify(user))
-sessionStorage.setItem('temp', data)
 ```
 
 #### ✅ DO
@@ -152,14 +142,6 @@ export interface INavbarItem {
 // Deep imports
 import Button from '@mui/material/Button'
 import Box from '@mui/material/Box'
-
-// Correct storage handling
-import { getDataStorage, saveDataStorage, removeDataStorage } from '../lib/handleStorage'
-
-const token = getDataStorage('token')
-saveDataStorage('user', user) // Automatically stringifies objects
-saveDataStorage('temp', data, 'session') // For sessionStorage
-removeDataStorage('old-key')
 ```
 
 ## Creating New Routes
@@ -186,7 +168,6 @@ To create a new route (e.g., `/register`) without `MainLayout`:
 - [ ] Use `interface Props` with `React.FC<Props>` for components
 - [ ] Prefix types/interfaces in `types/` folder with `I`
 - [ ] Use Zustand for state, never Context API
-- [ ] Use handleStorage utilities for all storage operations (never direct localStorage/sessionStorage)
 - [ ] Use TanStack Query for API calls
 - [ ] Follow naming conventions (useQuery*/useMutation*)
 - [ ] Place files in correct directory structure

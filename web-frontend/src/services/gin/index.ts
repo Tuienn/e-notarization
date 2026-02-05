@@ -36,8 +36,8 @@ export const ginApiService = async <T = any>(url: string, options?: RequestInit,
                 options?.body instanceof FormData
                     ? options.body
                     : options?.body
-                        ? JSON.parse(options.body as string)
-                        : undefined
+                      ? JSON.parse(options.body as string)
+                      : undefined
         })
 
         return (response.data ?? (undefined as unknown)) as T
@@ -91,7 +91,7 @@ export const ginApiService = async <T = any>(url: string, options?: RequestInit,
                 throw new Error(
                     axios.isAxiosError(refreshError)
                         ? refreshError.response?.data?.message ||
-                        `Refresh token thất bại (HTTP ${refreshError.response?.status})`
+                              `Refresh token thất bại (HTTP ${refreshError.response?.status})`
                         : 'Refresh token thất bại'
                 )
             }

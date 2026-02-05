@@ -17,7 +17,16 @@
             "title": "Tùy chọn",
             "notifications": "Thông báo",
             "darkMode": "Chế độ tối",
-            "language": "Ngôn ngữ"
+            "language": "Ngôn ngữ",
+            "themeColor": "Màu chủ đề"
+        },
+        "themeColor": {
+            "dialogTitle": "Chọn màu chủ đề",
+            "dialogDescription": "Chọn màu chủ đề cho hệ thống",
+            "colors": {
+                "blue": "Xanh dương",
+                "red": "Đỏ"
+            }
         },
         "logout": "Đăng xuất"
     },

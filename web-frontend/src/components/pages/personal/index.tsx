@@ -12,6 +12,7 @@ import Lock from '@mui/icons-material/Lock'
 import DarkMode from '@mui/icons-material/DarkMode'
 import Logout from '@mui/icons-material/Logout'
 import Person from '@mui/icons-material/Person'
+import Palette from '@mui/icons-material/Palette'
 import InfoUser from './InfoUser'
 import SettingItem from './SettingItem'
 import SettingItemGroup from './SettingItemGroup'
@@ -22,6 +23,7 @@ import { useNotify } from '../../../stores/notification/notification.selector'
 import { useTranslation } from 'react-i18next'
 import ThemeSwitch from '../../common/setting/ThemeSwitch'
 import LanguageSelector from '../../common/setting/LanguageSelector'
+import ThemeColorSelector from '../../common/setting/ThemeColorSelector'
 
 const PersonalPage: React.FC = () => {
     const { t } = useTranslation('personal')
@@ -110,6 +112,11 @@ const PersonalPage: React.FC = () => {
                                 icon={<DarkMode />}
                                 title={t('settings.preferences.darkMode')}
                                 action={<ThemeSwitch />}
+                            />
+                            <SettingItem
+                                icon={<Palette />}
+                                title={t('settings.preferences.themeColor')}
+                                action={<ThemeColorSelector />}
                             />
                             <SettingItem
                                 icon={<Language />}

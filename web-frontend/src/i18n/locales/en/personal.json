@@ -17,7 +17,16 @@
             "title": "Preferences",
             "notifications": "Notifications",
             "darkMode": "Dark mode",
-            "language": "Language"
+            "language": "Language",
+            "themeColor": "Theme color"
+        },
+        "themeColor": {
+            "dialogTitle": "Select theme color",
+            "dialogDescription": "Choose a theme color for the system",
+            "colors": {
+                "blue": "Blue",
+                "red": "Red"
+            }
         },
         "logout": "Logout"
     },
