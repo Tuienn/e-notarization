@@ -1,6 +1,12 @@
+# Repository Instructions
+These are repository-wide instructions for GitHub Copilot in this repo.
+
+## Included rules
+- `core.mdc`
+
 ---
-trigger: always_on
----
+
+## core.mdc
 
 # E-Notarization Web Frontend - Core Directives
 
