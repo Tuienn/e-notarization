@@ -75,12 +75,7 @@ const RegisterForm: React.FC = () => {
                 </Typography>
             </Stack>
 
-            <Stack
-                component='form'
-                onSubmit={form.handleSubmit((data) => mutationRegiser.mutate(data))}
-                spacing={2}
-                noValidate
-            >
+            <Stack component='form' onSubmit={form.handleSubmit((data) => mutationRegiser.mutate(data))} spacing={2}>
                 <TextField
                     {...form.register('username')}
                     label={t('register.username')}

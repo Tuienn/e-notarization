@@ -6,7 +6,7 @@ export const COLOR_PALETTES = {
         secondary: '#9c27b0'
     },
     red: {
-        primary: '#e53935',
+        primary: '#ec1b2f',
         secondary: '#00897b'
     },
     green: {
