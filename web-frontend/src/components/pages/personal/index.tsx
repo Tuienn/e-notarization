@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import Stack from '@mui/material/Stack'
-import Grid from '@mui/material/Grid'
 import Container from '@mui/material/Container'
 import Switch from '@mui/material/Switch'
 import IconButton from '@mui/material/IconButton'
@@ -27,7 +26,6 @@ import ThemeColorSelector from '../../common/setting/ThemeColorSelector'
 
 const PersonalPage: React.FC = () => {
     const { t } = useTranslation('personal')
-    const { t: tCommon } = useTranslation('common')
     const navigate = useNavigate()
     const notify = useNotify()
     const [showLogoutDialog, setShowLogoutDialog] = useState(false)
@@ -51,90 +49,75 @@ const PersonalPage: React.FC = () => {
     }
 
     return (
-        <Container maxWidth='lg' className='children-main-layout' sx={{ py: 4 }}>
-            <Grid container spacing={3}>
-                {/* Left Column - User Info & Logout */}
-                <Grid size={{ xs: 12, md: 4 }}>
-                    <Stack spacing={3} sx={{ height: '100%' }}>
-                        <InfoUser name={user.name} phone={user.phone} avatar={user.avatar} />
-                        <Button
-                            variant='outlined'
-                            color='error'
-                            size='large'
-                            startIcon={<Logout />}
-                            onClick={handleLogout}
-                            fullWidth
-                            sx={{
-                                borderRadius: 3,
-                                py: 1.5,
-                                fontWeight: 600,
-                                mt: 'auto'
-                            }}
-                        >
-                            {t('settings.logout')}
-                        </Button>
-                    </Stack>
-                </Grid>
+        <Container maxWidth='lg' className='children-main-layout'>
+            <Stack spacing={2} direction={{ xs: 'column', md: 'row' }} alignItems='stretch'>
+                {/* Left column */}
+                <Stack spacing={2} width={{ md: 320 }}>
+                    <InfoUser name={user.name} phone={user.phone} avatar={user.avatar} />
 
-                {/* Right Column - Settings */}
-                <Grid size={{ xs: 12, md: 8 }}>
-                    <Stack spacing={3}>
-                        {/* Account Settings */}
-                        <SettingItemGroup title={t('settings.account.title')}>
-                            <SettingItem
-                                icon={<Person />}
-                                title={t('settings.account.profile')}
-                                action={
-                                    <IconButton size='small' onClick={() => console.log('Navigate to profile edit')}>
-                                        <ChevronRight />
-                                    </IconButton>
-                                }
-                            />
-                            <SettingItem
-                                icon={<Lock />}
-                                title={t('settings.account.changePassword')}
-                                action={
-                                    <IconButton size='small' onClick={() => console.log('Navigate to change password')}>
-                                        <ChevronRight />
-                                    </IconButton>
-                                }
-                            />
-                        </SettingItemGroup>
+                    <Button variant='outlined' color='error' size='large' startIcon={<Logout />} onClick={handleLogout}>
+                        {t('logout.label')}
+                    </Button>
+                </Stack>
 
-                        {/* Preferences */}
-                        <SettingItemGroup title={t('settings.preferences.title')}>
-                            <SettingItem
-                                icon={<Notifications />}
-                                title={t('settings.preferences.notifications')}
-                                action={<Switch />}
-                            />
-                            <SettingItem
-                                icon={<DarkMode />}
-                                title={t('settings.preferences.darkMode')}
-                                action={<ThemeSwitch />}
-                            />
-                            <SettingItem
-                                icon={<Palette />}
-                                title={t('settings.preferences.themeColor')}
-                                action={<ThemeColorSelector />}
-                            />
-                            <SettingItem
-                                icon={<Language />}
-                                title={t('settings.preferences.language')}
-                                action={<LanguageSelector />}
-                            />
-                        </SettingItemGroup>
-                    </Stack>
-                </Grid>
-            </Grid>
+                {/* Right column */}
+                <Stack spacing={2} flex={1}>
+                    <SettingItemGroup title={t('settings.account.title')}>
+                        <SettingItem
+                            icon={<Person />}
+                            title={t('settings.account.profile')}
+                            action={
+                                <IconButton size='small'>
+                                    <ChevronRight />
+                                </IconButton>
+                            }
+                        />
 
-            {/* Logout Confirmation Dialog */}
+                        <SettingItem
+                            icon={<Lock />}
+                            title={t('settings.account.changePassword')}
+                            action={
+                                <IconButton size='small'>
+                                    <ChevronRight />
+                                </IconButton>
+                            }
+                        />
+                    </SettingItemGroup>
+
+                    <SettingItemGroup title={t('settings.preferences.title')}>
+                        <SettingItem
+                            icon={<Notifications />}
+                            title={t('settings.preferences.notifications')}
+                            action={<Switch />}
+                        />
+
+                        <SettingItem
+                            icon={<DarkMode />}
+                            title={t('settings.preferences.darkMode')}
+                            action={<ThemeSwitch />}
+                        />
+
+                        <SettingItem
+                            icon={<Palette />}
+                            title={t('settings.preferences.themeColor')}
+                            action={<ThemeColorSelector />}
+                        />
+
+                        <SettingItem
+                            icon={<Language />}
+                            title={t('settings.preferences.language')}
+                            action={<LanguageSelector />}
+                        />
+                    </SettingItemGroup>
+                </Stack>
+            </Stack>
+
             <AlertDialog
                 open={showLogoutDialog}
                 onClose={() => setShowLogoutDialog(false)}
                 onOk={handleConfirmLogout}
-                title={tCommon('logout.confirmTitle')}
-                description={tCommon('logout.confirmMessage')}
+                title={t('logout.confirmTitle')}
+                description={t('logout.confirmMessage')}
             />
         </Container>
     )

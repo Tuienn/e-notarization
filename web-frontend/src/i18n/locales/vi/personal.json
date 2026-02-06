@@ -25,12 +25,20 @@
             "dialogDescription": "Chọn màu chủ đề cho hệ thống",
             "colors": {
                 "blue": "Xanh dương",
-                "red": "Đỏ"
+                "red": "Đỏ",
+                "green": "Xanh lá",
+                "orange": "Cam"
             }
         },
-        "logout": "Đăng xuất"
+        "language": {
+            "en": "Tiếng Anh",
+            "vi": "Tiếng Việt"
+        }
     },
     "logout": {
-        "success": "Đăng xuất thành công"
+        "label": "Đăng xuất",
+        "success": "Đăng xuất thành công",
+        "confirmTitle": "Xác nhận đăng xuất",
+        "confirmMessage": "Bạn có chắc chắn muốn đăng xuất không?"
     }
 }

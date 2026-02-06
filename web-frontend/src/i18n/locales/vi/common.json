@@ -4,9 +4,5 @@
         "confirm": "Xác nhận",
         "ok": "Đồng ý",
         "close": "Đóng"
-    },
-    "logout": {
-        "confirmTitle": "Xác nhận đăng xuất",
-        "confirmMessage": "Bạn có chắc chắn muốn đăng xuất không?"
     }
 }

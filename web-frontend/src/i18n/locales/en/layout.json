@@ -1,10 +1,6 @@
 {
     "home": "Home",
     "personal": "Personal",
-    "language": {
-        "en": "English",
-        "vi": "Vietnamese"
-    },
     "login": "Login",
     "deposit": "Deposit",
     "withdraw": "Withdraw",
@@ -14,16 +10,7 @@
         "homeButton": "Go to home",
         "backButton": "Back"
     },
-    "settings": {
-        "title": "Settings",
-        "theme": {
-            "title": "Theme",
-            "light": "Light",
-            "dark": "Dark",
-            "system": "System",
-            "switchToLight": "Switch to light mode",
-            "switchToDark": "Switch to dark mode",
-            "switchToSystem": "Switch to system mode"
-        }
+    "notifications": {
+        "title": "Notifications"
     }
 }

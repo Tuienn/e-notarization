@@ -25,12 +25,20 @@
             "dialogDescription": "Choose a theme color for the system",
             "colors": {
                 "blue": "Blue",
-                "red": "Red"
+                "red": "Red",
+                "green": "Green",
+                "orange": "Orange"
             }
         },
-        "logout": "Logout"
+        "language": {
+            "en": "English",
+            "vi": "Vietnamese"
+        }
     },
     "logout": {
-        "success": "Logout successful"
+        "label": "Logout",
+        "success": "Logout successful",
+        "confirmTitle": "Confirm Logout",
+        "confirmMessage": "Are you sure you want to logout?"
     }
 }

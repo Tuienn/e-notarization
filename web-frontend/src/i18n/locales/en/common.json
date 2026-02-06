@@ -4,9 +4,5 @@
         "confirm": "Confirm",
         "ok": "OK",
         "close": "Close"
-    },
-    "logout": {
-        "confirmTitle": "Confirm Logout",
-        "confirmMessage": "Are you sure you want to logout?"
     }
 }

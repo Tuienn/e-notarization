@@ -1,10 +1,6 @@
 {
     "home": "Trang chủ",
     "personal": "Cá nhân",
-    "language": {
-        "en": "Tiếng Anh",
-        "vi": "Tiếng Việt"
-    },
     "login": "Đăng nhập",
     "deposit": "Nạp tiền",
     "withdraw": "Rút tiền",
@@ -14,16 +10,7 @@
         "homeButton": "Về trang chủ",
         "backButton": "Quay lại"
     },
-    "settings": {
-        "title": "Cài đặt",
-        "theme": {
-            "title": "Giao diện",
-            "light": "Sáng",
-            "dark": "Tối",
-            "system": "Hệ thống",
-            "switchToLight": "Chuyển sang chế độ sáng",
-            "switchToDark": "Chuyển sang chế độ tối",
-            "switchToSystem": "Chuyển sang chế độ hệ thống"
-        }
+    "notifications": {
+        "title": "Thông báo"
     }
 }

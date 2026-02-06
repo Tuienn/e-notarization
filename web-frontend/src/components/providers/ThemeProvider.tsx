@@ -16,6 +16,9 @@ const ThemeProvider: React.FC<Props> = (props) => {
     const theme = useMemo(() => {
         const palette = COLOR_PALETTES[themeColor as keyof typeof COLOR_PALETTES] || COLOR_PALETTES.blue
 
+        // Create a temporary theme to use augmentColor
+        const tempTheme = createTheme()
+
         return createTheme({
             cssVariables: {
                 colorSchemeSelector: 'data-mui-color-scheme'
@@ -23,14 +26,22 @@ const ThemeProvider: React.FC<Props> = (props) => {
             colorSchemes: {
                 light: {
                     palette: {
-                        primary: palette.primary,
-                        secondary: palette.secondary
+                        primary: tempTheme.palette.augmentColor({
+                            color: { main: palette.primary }
+                        }),
+                        secondary: tempTheme.palette.augmentColor({
+                            color: { main: palette.secondary }
+                        })
                     }
                 },
                 dark: {
                     palette: {
-                        primary: palette.primary,
-                        secondary: palette.secondary
+                        primary: tempTheme.palette.augmentColor({
+                            color: { main: palette.primary }
+                        }),
+                        secondary: tempTheme.palette.augmentColor({
+                            color: { main: palette.secondary }
+                        })
                     }
                 }
             },
@@ -46,7 +57,7 @@ const ThemeProvider: React.FC<Props> = (props) => {
                     xs: 0,
                     sm: 640,
                     md: 768,
-                    lg: 1024,
+                    lg: 1124,
                     xl: 1280
                 }
             }

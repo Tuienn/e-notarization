@@ -32,7 +32,17 @@ const ThemeColorSelector: React.FC = () => {
         {
             id: 'red',
             name: t('settings.themeColor.colors.red'),
-            primary: '#d32f2f'
+            primary: '#f44336'
+        },
+        {
+            id: 'green',
+            name: t('settings.themeColor.colors.green'),
+            primary: '#4caf50'
+        },
+        {
+            id: 'orange',
+            name: t('settings.themeColor.colors.orange'),
+            primary: '#ff9800'
         }
     ]
 
