@@ -16,6 +16,12 @@ from pathlib import Path
 from typing import List, Dict
 
 
+EXCLUDED_SKILLS = {
+    "antigravity-exporter",
+    "github-copilot-exporter",
+}
+
+
 class SkillExporter:
     """Export Cursor skills to Antigravity workspace"""
     
@@ -28,10 +34,10 @@ class SkillExporter:
         if not self.source_dir.exists():
             return []
         
-        # Get all subdirectories in source
+        # Get all subdirectories in source, excluding specified skills
         skill_dirs = [
             d for d in self.source_dir.iterdir() 
-            if d.is_dir() and not d.name.startswith('.') and d.name != 'antigravity-exporter'
+            if d.is_dir() and not d.name.startswith('.') and d.name not in EXCLUDED_SKILLS
         ]
         
         return sorted(skill_dirs)
