@@ -31,6 +31,7 @@ src/
 │   └── store/              # UI Components directly connected to Store
 ├── constants/              # Constants, static config (enum, API config)
 ├── i18n/                   # Internationalization config (default: 'en')
+├── hooks/                  # Custom hook
 ├── lib/                    # Core utility libraries
 │   ├── handleCrypto.ts     # Encryption handling
 │   ├── handleStorage.ts    # Storage handling (localStorage/sessionStorage)
@@ -61,7 +62,7 @@ src/
 ### General Rules
 
 - **Function Style:** **MANDATORY** use Arrow Functions for all components and functions
-- **Component Props:** Use interface for props definition with `React.FC<Props>` typing
+- **Component Props:** Use interface for props definition with `React.FC<Props>` typing and use in code is object `props.`
 - **Type Naming Convention:**
     - Types/interfaces in `src/types/` folder **MUST** be prefixed with `I` (e.g., `IUser`, `INavbarItem`)
     - Component Props interfaces do NOT need `I` prefix (just `Props`)
@@ -70,6 +71,11 @@ src/
 - **State Management:**
     - Only use Zustand for global state
     - **ABSOLUTELY FORBIDDEN** to use React Context Provider for state management
+- **Storage Handling:**
+    - **MANDATORY** use utilities from `src/lib/handleStorage.ts` for all storage operations
+    - **ABSOLUTELY FORBIDDEN** to use `localStorage` or `sessionStorage` directly
+    - Use `saveDataStorage()`, `getDataStorage()`, and `removeDataStorage()` functions
+    - Benefits: Centralized error handling, automatic JSON parsing/stringification, consistent API
 
 ### API & Data Fetching (TanStack Query)
 
@@ -107,6 +113,11 @@ export interface User {
 
 // Importing from root package
 import { Button, Box } from '@mui/material'
+
+// Direct localStorage usage
+const token = localStorage.getItem('token')
+localStorage.setItem('user', JSON.stringify(user))
+sessionStorage.setItem('temp', data)
 ```
 
 #### ✅ DO
@@ -141,6 +152,14 @@ export interface INavbarItem {
 // Deep imports
 import Button from '@mui/material/Button'
 import Box from '@mui/material/Box'
+
+// Correct storage handling
+import { getDataStorage, saveDataStorage, removeDataStorage } from '../lib/handleStorage'
+
+const token = getDataStorage('token')
+saveDataStorage('user', user) // Automatically stringifies objects
+saveDataStorage('temp', data, 'session') // For sessionStorage
+removeDataStorage('old-key')
 ```
 
 ## Creating New Routes
@@ -151,7 +170,7 @@ To create a new route (e.g., `/settings`) using shared `MainLayout`:
 
 1. **Create route file**: `src/routes/_layout/settings.tsx`
 2. **Create page component**: `src/components/pages/settings/index.tsx`
-3. **Update Route Tree**: Run `pnpm gen:routes` to auto-update `routeTree.gen.ts`
+3. **Update Route Tree**: Run `npm gen:routes` to auto-update `routeTree.gen.ts`
 
 ### Route without MainLayout
 
@@ -159,7 +178,7 @@ To create a new route (e.g., `/register`) without `MainLayout`:
 
 1. **Create route file**: `src/routes/register.tsx`
 2. **Create page component**: `src/components/pages/register/index.tsx`
-3. **Update Route Tree**: Run `pnpm gen:routes`
+3. **Update Route Tree**: Run `npm gen:routes`
 
 ## Checklist
 
@@ -167,8 +186,9 @@ To create a new route (e.g., `/register`) without `MainLayout`:
 - [ ] Use `interface Props` with `React.FC<Props>` for components
 - [ ] Prefix types/interfaces in `types/` folder with `I`
 - [ ] Use Zustand for state, never Context API
+- [ ] Use handleStorage utilities for all storage operations (never direct localStorage/sessionStorage)
 - [ ] Use TanStack Query for API calls
 - [ ] Follow naming conventions (useQuery*/useMutation*)
 - [ ] Place files in correct directory structure
-- [ ] Run `pnpm gen:routes` after creating new routes
+- [ ] Run `npm gen:routes` after creating new routes
 - [ ] Keep code self-documenting, minimize comments

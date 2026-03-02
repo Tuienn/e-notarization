@@ -1,10 +1,9 @@
 import Box from '@mui/material/Box'
 import Divider from '@mui/material/Divider'
 import Drawer from '@mui/material/Drawer'
-import { useTheme } from '@mui/material/styles'
 import Typography from '@mui/material/Typography'
-import useMediaQuery from '@mui/material/useMediaQuery'
 import type { ReactNode } from 'react'
+import useBreakpoint from '../../../hooks/useBreakpoint'
 
 interface Props {
     title?: string
@@ -16,18 +15,17 @@ interface Props {
 }
 
 const CustomDrawer: React.FC<Props> = (props) => {
-    const theme = useTheme()
-    const mdScreen = useMediaQuery(theme.breakpoints.up('md'))
+    const breakpoint = useBreakpoint()
 
     return (
-        <Drawer open={props.open} onClose={props.onClose} anchor={mdScreen ? 'right' : 'bottom'}>
+        <Drawer open={props.open} onClose={props.onClose} anchor={breakpoint.md ? 'right' : 'bottom'}>
             <Box
                 p={2}
                 minWidth={300}
                 minHeight={300}
                 overflow={'auto'}
-                maxHeight={mdScreen ? '100vh' : '50vh'}
-                maxWidth={!mdScreen ? '100vw' : '50vw'}
+                maxHeight={breakpoint.md ? '100vh' : '50vh'}
+                maxWidth={!breakpoint.md ? '100vw' : '50vw'}
             >
                 {props.title && (
                     <>

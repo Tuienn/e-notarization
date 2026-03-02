@@ -1,61 +1,125 @@
-import { useQuery } from '@tanstack/react-query'
-import { useTranslation } from 'react-i18next'
-import Box from '@mui/material/Box'
-import Card from '@mui/material/Card'
+import { useState } from 'react'
 import Stack from '@mui/material/Stack'
-import Typography from '@mui/material/Typography'
-import Skeleton from '@mui/material/Skeleton'
-import Alert from '@mui/material/Alert'
-import Paper from '@mui/material/Paper'
-import AuthService from '../../../services/gin/auth.service'
+import Container from '@mui/material/Container'
+import Switch from '@mui/material/Switch'
+import IconButton from '@mui/material/IconButton'
+import Button from '@mui/material/Button'
+import ChevronRight from '@mui/icons-material/ChevronRight'
+import Notifications from '@mui/icons-material/Notifications'
+import Language from '@mui/icons-material/Language'
+import Lock from '@mui/icons-material/Lock'
+import DarkMode from '@mui/icons-material/DarkMode'
+import Logout from '@mui/icons-material/Logout'
+import Person from '@mui/icons-material/Person'
+import Palette from '@mui/icons-material/Palette'
+import InfoUser from './InfoUser'
+import SettingItem from './SettingItem'
+import SettingItemGroup from './SettingItemGroup'
+import AlertDialog from '../../common/mui/AlertDialog'
+import { useNavigate } from '@tanstack/react-router'
+import { tokenFacade } from '../../../stores/token/token.facade'
+import { useNotify } from '../../../stores/notification/notification.selector'
+import { useTranslation } from 'react-i18next'
+import ThemeSwitch from '../../common/setting/ThemeSwitch'
+import LanguageSelector from '../../common/setting/LanguageSelector'
+import ThemeColorSelector from '../../common/setting/ThemeColorSelector'
 
 const PersonalPage: React.FC = () => {
     const { t } = useTranslation('personal')
+    const navigate = useNavigate()
+    const notify = useNotify()
+    const [showLogoutDialog, setShowLogoutDialog] = useState(false)
 
-    const queryUserProfile = useQuery({
-        queryKey: ['userProfile'],
-        queryFn: () => AuthService.getUserProfile(),
-        retry: 1
-    })
-
-    if (queryUserProfile.isPending) {
-        return (
-            <Paper sx={{ p: 2 }}>
-                <Stack spacing={1}>
-                    <Skeleton width='40%' height={40} />
-                    <Skeleton width='60%' height={40} />
-                    <Skeleton width='70%' height={40} />
-                </Stack>
-            </Paper>
-        )
+    // TODO: Replace with real user data from API/store
+    const user = {
+        name: 'Nguyễn Văn A',
+        phone: '+84 123 456 789',
+        avatar: undefined // Optional: add avatar URL here
     }
 
-    if (queryUserProfile.isError) {
-        return <Alert severity='error'>{t('error.loadFailed')}</Alert>
+    const handleLogout = () => {
+        setShowLogoutDialog(true)
     }
 
-    const user = queryUserProfile.data
+    const handleConfirmLogout = () => {
+        tokenFacade.logout()
+        notify(t('logout.success'), 'success')
+        navigate({ to: '/' })
+        setShowLogoutDialog(false)
+    }
 
     return (
-        <Box p={3}>
-            <Card>
-                <Box p={2}>
-                    <Stack spacing={2}>
-                        <Typography variant='h5' fontWeight='bold'>
-                            {t('title')}
-                        </Typography>
-                        <Stack spacing={1}>
-                            <Typography variant='body1'>
-                                <strong>{t('fields.name')}:</strong> {user?.name}
-                            </Typography>
-                            <Typography variant='body1'>
-                                <strong>{t('fields.email')}:</strong> {user?.email}
-                            </Typography>
-                        </Stack>
-                    </Stack>
-                </Box>
-            </Card>
-        </Box>
+        <Container maxWidth='lg' className='children-main-layout'>
+            <Stack spacing={2} direction={{ xs: 'column', md: 'row' }} alignItems='stretch'>
+                {/* Left column */}
+                <Stack spacing={2} width={{ md: 320 }}>
+                    <InfoUser name={user.name} phone={user.phone} avatar={user.avatar} />
+
+                    <Button variant='outlined' color='error' size='large' startIcon={<Logout />} onClick={handleLogout}>
+                        {t('logout.label')}
+                    </Button>
+                </Stack>
+
+                {/* Right column */}
+                <Stack spacing={2} flex={1}>
+                    <SettingItemGroup title={t('settings.account.title')}>
+                        <SettingItem
+                            icon={<Person />}
+                            title={t('settings.account.profile')}
+                            action={
+                                <IconButton size='small'>
+                                    <ChevronRight />
+                                </IconButton>
+                            }
+                        />
+
+                        <SettingItem
+                            icon={<Lock />}
+                            title={t('settings.account.changePassword')}
+                            action={
+                                <IconButton size='small'>
+                                    <ChevronRight />
+                                </IconButton>
+                            }
+                        />
+                    </SettingItemGroup>
+
+                    <SettingItemGroup title={t('settings.preferences.title')}>
+                        <SettingItem
+                            icon={<Notifications />}
+                            title={t('settings.preferences.notifications')}
+                            action={<Switch />}
+                        />
+
+                        <SettingItem
+                            icon={<DarkMode />}
+                            title={t('settings.preferences.darkMode')}
+                            action={<ThemeSwitch />}
+                        />
+
+                        <SettingItem
+                            icon={<Palette />}
+                            title={t('settings.preferences.themeColor')}
+                            action={<ThemeColorSelector />}
+                        />
+
+                        <SettingItem
+                            icon={<Language />}
+                            title={t('settings.preferences.language')}
+                            action={<LanguageSelector />}
+                        />
+                    </SettingItemGroup>
+                </Stack>
+            </Stack>
+
+            <AlertDialog
+                open={showLogoutDialog}
+                onClose={() => setShowLogoutDialog(false)}
+                onOk={handleConfirmLogout}
+                title={t('logout.confirmTitle')}
+                description={t('logout.confirmMessage')}
+            />
+        </Container>
     )
 }
 

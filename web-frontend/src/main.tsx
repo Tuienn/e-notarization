@@ -8,7 +8,7 @@ import TanstackQueryProvider from './components/providers/TanstackQueryProvider.
 import './assets/styles/index.css'
 
 import './i18n'
-import NotificationHost from './components/store/NotificationHost.tsx'
+import NotificationHost from './components/stores/NotificationHost.tsx'
 
 createRoot(document.getElementById('root')!).render(
     <StrictMode>

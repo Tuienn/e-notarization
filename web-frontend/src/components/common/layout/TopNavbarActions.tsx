@@ -17,7 +17,7 @@ const TopNavbarActions = () => {
             </Button>
         </>
     ) : (
-        <Button color='primary' variant='outlined' component={Link} to='/login' sx={{ mr: 1 }}>
+        <Button color='primary' variant='outlined' component={Link} to='/auth' sx={{ mr: 1 }}>
             {t('login')}
         </Button>
     )
