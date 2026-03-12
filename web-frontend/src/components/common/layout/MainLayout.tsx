@@ -34,7 +34,7 @@ const MainLayout: React.FC<Props> = (props) => {
                 <TopNavbar items={navbarItems} activeHrefTo={activeHrefTo} />
             )}
             {props.children}
-            {!breakpoint.md && <BottomNavbar items={navbarItems} activeHrefTo={activeHrefTo} />}
+            {(!breakpoint.md || ['/', '/personal'].includes(activeHrefTo)) && <BottomNavbar items={navbarItems} activeHrefTo={activeHrefTo} />}
         </Box>
     )
 }

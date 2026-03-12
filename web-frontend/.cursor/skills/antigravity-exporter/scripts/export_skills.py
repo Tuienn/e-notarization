@@ -19,6 +19,7 @@ from typing import List, Dict
 EXCLUDED_SKILLS = {
     "antigravity-exporter",
     "github-copilot-exporter",
+    "codex-exporter",
 }
 
 

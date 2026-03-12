@@ -8,6 +8,7 @@ from pathlib import Path
 EXCLUDED_SKILLS = {
     "antigravity-exporter",
     "github-copilot-exporter",
+    "codex-exporter",
 }
 
 
