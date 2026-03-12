@@ -5,7 +5,7 @@ const HomePage: React.FC = () => {
     return (
         <div>
             <Button variant='contained'>
-                <Link to='/test-page' style={{ textDecoration: 'none', color: 'white' }}>
+                <Link to='/lotto535' style={{ textDecoration: 'none', color: 'white' }}>
                     Go to test page
                 </Link>
             </Button>

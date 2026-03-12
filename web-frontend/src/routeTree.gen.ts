@@ -9,15 +9,15 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as TestPageRouteImport } from './routes/test-page'
+import { Route as Lotto535RouteImport } from './routes/lotto535'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as LayoutRouteImport } from './routes/_layout'
 import { Route as LayoutIndexRouteImport } from './routes/_layout/index'
 import { Route as LayoutPersonalRouteImport } from './routes/_layout/personal'
 
-const TestPageRoute = TestPageRouteImport.update({
-  id: '/test-page',
-  path: '/test-page',
+const Lotto535Route = Lotto535RouteImport.update({
+  id: '/lotto535',
+  path: '/lotto535',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthRoute = AuthRouteImport.update({
@@ -43,12 +43,12 @@ const LayoutPersonalRoute = LayoutPersonalRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof LayoutIndexRoute
   '/auth': typeof AuthRoute
-  '/test-page': typeof TestPageRoute
+  '/lotto535': typeof Lotto535Route
   '/personal': typeof LayoutPersonalRoute
 }
 export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
-  '/test-page': typeof TestPageRoute
+  '/lotto535': typeof Lotto535Route
   '/personal': typeof LayoutPersonalRoute
   '/': typeof LayoutIndexRoute
 }
@@ -56,20 +56,20 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_layout': typeof LayoutRouteWithChildren
   '/auth': typeof AuthRoute
-  '/test-page': typeof TestPageRoute
+  '/lotto535': typeof Lotto535Route
   '/_layout/personal': typeof LayoutPersonalRoute
   '/_layout/': typeof LayoutIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/test-page' | '/personal'
+  fullPaths: '/' | '/auth' | '/lotto535' | '/personal'
   fileRoutesByTo: FileRoutesByTo
-  to: '/auth' | '/test-page' | '/personal' | '/'
+  to: '/auth' | '/lotto535' | '/personal' | '/'
   id:
     | '__root__'
     | '/_layout'
     | '/auth'
-    | '/test-page'
+    | '/lotto535'
     | '/_layout/personal'
     | '/_layout/'
   fileRoutesById: FileRoutesById
@@ -77,16 +77,16 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   LayoutRoute: typeof LayoutRouteWithChildren
   AuthRoute: typeof AuthRoute
-  TestPageRoute: typeof TestPageRoute
+  Lotto535Route: typeof Lotto535Route
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/test-page': {
-      id: '/test-page'
-      path: '/test-page'
-      fullPath: '/test-page'
-      preLoaderRoute: typeof TestPageRouteImport
+    '/lotto535': {
+      id: '/lotto535'
+      path: '/lotto535'
+      fullPath: '/lotto535'
+      preLoaderRoute: typeof Lotto535RouteImport
       parentRoute: typeof rootRouteImport
     }
     '/auth': {
@@ -136,7 +136,7 @@ const LayoutRouteWithChildren =
 const rootRouteChildren: RootRouteChildren = {
   LayoutRoute: LayoutRouteWithChildren,
   AuthRoute: AuthRoute,
-  TestPageRoute: TestPageRoute,
+  Lotto535Route: Lotto535Route,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
