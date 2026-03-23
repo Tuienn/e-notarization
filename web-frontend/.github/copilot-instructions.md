@@ -1,7 +1,9 @@
 # Repository Instructions
+
 These are repository-wide instructions for GitHub Copilot in this repo.
 
 ## Included rules
+
 - `comment-anchors.mdc`
 - `core.mdc`
 
@@ -48,6 +50,7 @@ Tags must be **UPPERCASE** and followed by a dash (`-`).
 // STUB - Implement payment webhook
 // LINK - https://stripe.com/docs/api
 ```
+
 ---
 
 ## core.mdc

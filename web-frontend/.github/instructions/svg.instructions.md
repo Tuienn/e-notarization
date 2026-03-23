@@ -1,5 +1,5 @@
 ---
-applyTo: "**/*.tsx"
+applyTo: '**/*.tsx'
 ---
 
 # SVG Usage with vite-plugin-svgr

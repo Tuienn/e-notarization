@@ -1,8 +1,8 @@
 import Container from '@mui/material/Container'
 import PageHeader from '../../common/layout/PageHeader'
 import MarqueeBanner from '../../common/layout/MarqueeBanner'
-import Ball3D from '../../common/common/Ball3D'
 import Stack from '@mui/material/Stack'
+import RowTicket from './RowTicket'
 
 const Lotto535Page: React.FC = () => {
     return (
@@ -16,13 +16,10 @@ const Lotto535Page: React.FC = () => {
                 ]}
             />
             <Container className='children-main-layout' maxWidth='lg'>
-                <Stack direction='row' spacing={1.5}>
-                    <Ball3D content="01" color="green" />
-                    <Ball3D content="60" color="blue" />
-                    <Ball3D content="12" color="orange" />
-                    <Ball3D content="01" color="green" />
-                    <Ball3D content="60" color="blue" />
-                    <Ball3D content="12" color="orange" />
+                <Stack spacing={1.5}>
+                    <RowTicket numbers={['01', '60', '12', '01', '60', '12']} color='green' />
+                    <RowTicket numbers={['01', '60', '12', '01', '60', '12']} color='blue' />
+                    <RowTicket numbers={['01', '60', '12', '01', '60', '12']} color='orange' />
                 </Stack>
             </Container>
         </main>

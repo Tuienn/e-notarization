@@ -1,5 +1,5 @@
 ---
-applyTo: "src/components/**/*.tsx"
+applyTo: 'src/components/**/*.tsx'
 ---
 
 # TanStack Query Loading & Error States

@@ -1,5 +1,5 @@
 ---
-applyTo: "src/**/*.ts,src/**/*.tsx"
+applyTo: 'src/**/*.ts,src/**/*.tsx'
 ---
 
 # Code-Based Routing
@@ -48,68 +48,68 @@ import { createRootRoute, createRoute } from '@tanstack/react-router'
 const rootRoute = createRootRoute()
 
 const indexRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  path: '/',
+    getParentRoute: () => rootRoute,
+    path: '/'
 })
 
 const aboutRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  path: 'about',
+    getParentRoute: () => rootRoute,
+    path: 'about'
 })
 
 const postsRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  path: 'posts',
+    getParentRoute: () => rootRoute,
+    path: 'posts'
 })
 
 const postsIndexRoute = createRoute({
-  getParentRoute: () => postsRoute,
-  path: '/',
+    getParentRoute: () => postsRoute,
+    path: '/'
 })
 
 const postRoute = createRoute({
-  getParentRoute: () => postsRoute,
-  path: '$postId',
+    getParentRoute: () => postsRoute,
+    path: '$postId'
 })
 
 const postEditorRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  path: 'posts/$postId/edit',
+    getParentRoute: () => rootRoute,
+    path: 'posts/$postId/edit'
 })
 
 const settingsRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  path: 'settings',
+    getParentRoute: () => rootRoute,
+    path: 'settings'
 })
 
 const profileRoute = createRoute({
-  getParentRoute: () => settingsRoute,
-  path: 'profile',
+    getParentRoute: () => settingsRoute,
+    path: 'profile'
 })
 
 const notificationsRoute = createRoute({
-  getParentRoute: () => settingsRoute,
-  path: 'notifications',
+    getParentRoute: () => settingsRoute,
+    path: 'notifications'
 })
 
 const pathlessLayoutRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  id: 'pathlessLayout',
+    getParentRoute: () => rootRoute,
+    id: 'pathlessLayout'
 })
 
 const pathlessLayoutARoute = createRoute({
-  getParentRoute: () => pathlessLayoutRoute,
-  path: 'route-a',
+    getParentRoute: () => pathlessLayoutRoute,
+    path: 'route-a'
 })
 
 const pathlessLayoutBRoute = createRoute({
-  getParentRoute: () => pathlessLayoutRoute,
-  path: 'route-b',
+    getParentRoute: () => pathlessLayoutRoute,
+    path: 'route-b'
 })
 
 const filesRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  path: 'files/$',
+    getParentRoute: () => rootRoute,
+    path: 'files/$'
 })
 ```
 
@@ -119,9 +119,9 @@ All other routes other than the root route are configured using the `createRoute
 
 ```tsx
 const route = createRoute({
-  getParentRoute: () => rootRoute,
-  path: '/posts',
-  component: PostsComponent,
+    getParentRoute: () => rootRoute,
+    path: '/posts',
+    component: PostsComponent
 })
 ```
 
@@ -211,7 +211,7 @@ import { createRootRouteWithContext } from '@tanstack/react-router'
 import type { QueryClient } from '@tanstack/react-query'
 
 export interface MyRouterContext {
-  queryClient: QueryClient
+    queryClient: QueryClient
 }
 const rootRoute = createRootRouteWithContext<MyRouterContext>()
 ```
@@ -224,8 +224,8 @@ To create a basic route, simply provide a normal `path` string to the `createRou
 
 ```tsx
 const aboutRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  path: 'about',
+    getParentRoute: () => rootRoute,
+    path: 'about'
 })
 ```
 
@@ -237,14 +237,14 @@ Unlike file-based routing, which uses the `index` filename to denote an index ro
 
 ```tsx
 const postsRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  path: 'posts',
+    getParentRoute: () => rootRoute,
+    path: 'posts'
 })
 
 const postsIndexRoute = createRoute({
-  getParentRoute: () => postsRoute,
-  // Notice the single slash `/` here
-  path: '/',
+    getParentRoute: () => postsRoute,
+    // Notice the single slash `/` here
+    path: '/'
 })
 ```
 
@@ -256,17 +256,17 @@ Dynamic route segments work exactly the same in code-based routing as they do in
 
 ```tsx
 const postIdRoute = createRoute({
-  getParentRoute: () => postsRoute,
-  path: '$postId',
-  // In a loader
-  loader: ({ params }) => fetchPost(params.postId),
-  // Or in a component
-  component: PostComponent,
+    getParentRoute: () => postsRoute,
+    path: '$postId',
+    // In a loader
+    loader: ({ params }) => fetchPost(params.postId),
+    // Or in a component
+    component: PostComponent
 })
 
 function PostComponent() {
-  const { postId } = postIdRoute.useParams()
-  return <div>Post ID: {postId}</div>
+    const { postId } = postIdRoute.useParams()
+    return <div>Post ID: {postId}</div>
 }
 ```
 
@@ -279,13 +279,13 @@ As expected, splat/catch-all routes also work the same in code-based routing as 
 
 ```tsx
 const filesRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  path: 'files',
+    getParentRoute: () => rootRoute,
+    path: 'files'
 })
 
 const fileRoute = createRoute({
-  getParentRoute: () => filesRoute,
-  path: '$',
+    getParentRoute: () => filesRoute,
+    path: '$'
 })
 ```
 
@@ -303,34 +303,34 @@ Layout routes are routes that wrap their children in a layout component. In code
 
 ```tsx
 const postsRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  path: 'posts',
-  component: PostsLayoutComponent, // The layout component
+    getParentRoute: () => rootRoute,
+    path: 'posts',
+    component: PostsLayoutComponent // The layout component
 })
 
 function PostsLayoutComponent() {
-  return (
-    <div>
-      <h1>Posts</h1>
-      <Outlet />
-    </div>
-  )
+    return (
+        <div>
+            <h1>Posts</h1>
+            <Outlet />
+        </div>
+    )
 }
 
 const postsIndexRoute = createRoute({
-  getParentRoute: () => postsRoute,
-  path: '/',
+    getParentRoute: () => postsRoute,
+    path: '/'
 })
 
 const postsCreateRoute = createRoute({
-  getParentRoute: () => postsRoute,
-  path: 'create',
+    getParentRoute: () => postsRoute,
+    path: 'create'
 })
 
 const routeTree = rootRoute.addChildren([
-  // The postsRoute is the layout route
-  // Its children will be nested under the PostsLayoutComponent
-  postsRoute.addChildren([postsIndexRoute, postsCreateRoute]),
+    // The postsRoute is the layout route
+    // Its children will be nested under the PostsLayoutComponent
+    postsRoute.addChildren([postsIndexRoute, postsCreateRoute])
 ])
 ```
 
@@ -354,34 +354,34 @@ In file-based routing a pathless layout route is prefixed with a `_`, but in cod
 
 ```tsx
 const pathlessLayoutRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  id: 'pathlessLayout',
-  component: PathlessLayoutComponent,
+    getParentRoute: () => rootRoute,
+    id: 'pathlessLayout',
+    component: PathlessLayoutComponent
 })
 
 function PathlessLayoutComponent() {
-  return (
-    <div>
-      <h1>Pathless Layout</h1>
-      <Outlet />
-    </div>
-  )
+    return (
+        <div>
+            <h1>Pathless Layout</h1>
+            <Outlet />
+        </div>
+    )
 }
 
 const pathlessLayoutARoute = createRoute({
-  getParentRoute: () => pathlessLayoutRoute,
-  path: 'route-a',
+    getParentRoute: () => pathlessLayoutRoute,
+    path: 'route-a'
 })
 
 const pathlessLayoutBRoute = createRoute({
-  getParentRoute: () => pathlessLayoutRoute,
-  path: 'route-b',
+    getParentRoute: () => pathlessLayoutRoute,
+    path: 'route-b'
 })
 
 const routeTree = rootRoute.addChildren([
-  // The pathless layout route has no path, only an id
-  // So its children will be nested under the pathless layout route
-  pathlessLayoutRoute.addChildren([pathlessLayoutARoute, pathlessLayoutBRoute]),
+    // The pathless layout route has no path, only an id
+    // So its children will be nested under the pathless layout route
+    pathlessLayoutRoute.addChildren([pathlessLayoutARoute, pathlessLayoutBRoute])
 ])
 ```
 
@@ -405,32 +405,32 @@ Building non-nested routes in code-based routing does not require using a traili
 
 - `/posts_/$postId/edit`
 - `/posts`
-  - `$postId`
+    - `$postId`
 
 To do this we need to build a separate route for the post editor and include the entire path in the `path` option from the root of where we want the route to be nested (in this case, the root):
 
 ```tsx
 // The posts editor route is nested under the root route
 const postEditorRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  // The path includes the entire path we need to match
-  path: 'posts/$postId/edit',
+    getParentRoute: () => rootRoute,
+    // The path includes the entire path we need to match
+    path: 'posts/$postId/edit'
 })
 
 const postsRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  path: 'posts',
+    getParentRoute: () => rootRoute,
+    path: 'posts'
 })
 
 const postRoute = createRoute({
-  getParentRoute: () => postsRoute,
-  path: '$postId',
+    getParentRoute: () => postsRoute,
+    path: '$postId'
 })
 
 const routeTree = rootRoute.addChildren([
-  // The post editor route is nested under the root route
-  postEditorRoute,
-  postsRoute.addChildren([postRoute]),
+    // The post editor route is nested under the root route
+    postEditorRoute,
+    postsRoute.addChildren([postRoute])
 ])
 ```
 
@@ -644,53 +644,53 @@ This final order represents the order in which routes will be matched based on s
 Using that route tree, let's follow the matching process for a few different URLs:
 
 - `/blog`
-  ```
-  Root
-    ❌ /
-    ❌ about/us
-    ❌ about
-    ⏩ blog
-      ✅ /
-      - new
-      - $postId
-    - *
-  ```
-- `/blog/my-post`
-  ```
-  Root
-    ❌ /
-    ❌ about/us
-    ❌ about
-    ⏩ blog
+    ```
+    Root
       ❌ /
-      ❌ new
-      ✅ $postId
-    - *
-  ```
+      ❌ about/us
+      ❌ about
+      ⏩ blog
+        ✅ /
+        - new
+        - $postId
+      - *
+    ```
+- `/blog/my-post`
+    ```
+    Root
+      ❌ /
+      ❌ about/us
+      ❌ about
+      ⏩ blog
+        ❌ /
+        ❌ new
+        ✅ $postId
+      - *
+    ```
 - `/`
-  ```
-  Root
-    ✅ /
-    - about/us
-    - about
-    - blog
-      - /
-      - new
-      - $postId
-    - *
-  ```
+    ```
+    Root
+      ✅ /
+      - about/us
+      - about
+      - blog
+        - /
+        - new
+        - $postId
+      - *
+    ```
 - `/not-a-route`
-  ```
-  Root
-    ❌ /
-    ❌ about/us
-    ❌ about
-    ❌ blog
-      - /
-      - new
-      - $postId
-    ✅ *
-  ```
+    ```
+    Root
+      ❌ /
+      ❌ about/us
+      ❌ about
+      ❌ blog
+        - /
+        - new
+        - $postId
+      ✅ *
+    ```
 
 # Route Trees
 
@@ -717,9 +717,9 @@ And render a component tree that looks like this:
 
 ```tsx
 <Blog>
-  <Posts>
-    <Post postId="123" />
-  </Posts>
+    <Posts>
+        <Post postId='123' />
+    </Posts>
 </Blog>
 ```
 
@@ -772,7 +772,7 @@ All other routes, other than the [Root Route](#the-root-route), are configured u
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/')({
-  component: PostsComponent,
+    component: PostsComponent
 })
 ```
 
@@ -812,7 +812,7 @@ import { createRootRouteWithContext } from '@tanstack/react-router'
 import type { QueryClient } from '@tanstack/react-query'
 
 export interface MyRouterContext {
-  queryClient: QueryClient
+    queryClient: QueryClient
 }
 export const Route = createRootRouteWithContext<MyRouterContext>()
 ```
@@ -830,11 +830,11 @@ Let's take a look at an `/about` route:
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/about')({
-  component: AboutComponent,
+    component: AboutComponent
 })
 
 function AboutComponent() {
-  return <div>About</div>
+    return <div>About</div>
 }
 ```
 
@@ -852,11 +852,11 @@ import { createFileRoute } from '@tanstack/react-router'
 
 // Note the trailing slash, which is used to target index routes
 export const Route = createFileRoute('/posts/')({
-  component: PostsIndexComponent,
+    component: PostsIndexComponent
 })
 
 function PostsIndexComponent() {
-  return <div>Please select a post!</div>
+    return <div>Please select a post!</div>
 }
 ```
 
@@ -872,16 +872,16 @@ These params are then usable in your route's configuration and components! Let's
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/posts/$postId')({
-  // In a loader
-  loader: ({ params }) => fetchPost(params.postId),
-  // Or in a component
-  component: PostComponent,
+    // In a loader
+    loader: ({ params }) => fetchPost(params.postId),
+    // Or in a component
+    component: PostComponent
 })
 
 function PostComponent() {
-  // In a component!
-  const { postId } = Route.useParams()
-  return <div>Post ID: {postId}</div>
+    // In a component!
+    const { postId } = Route.useParams()
+    return <div>Post ID: {postId}</div>
 }
 ```
 
@@ -912,13 +912,13 @@ Optional path parameters allow you to define route segments that may or may not 
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/posts/{-$category}')({
-  component: PostsComponent,
+    component: PostsComponent
 })
 
 function PostsComponent() {
-  const { category } = Route.useParams()
+    const { category } = Route.useParams()
 
-  return <div>{category ? `Posts in ${category}` : 'All Posts'}</div>
+    return <div>{category ? `Posts in ${category}` : 'All Posts'}</div>
 }
 ```
 
@@ -929,7 +929,7 @@ You can also define multiple optional parameters in a single route:
 ```tsx
 // posts.{-$category}.{-$slug}.tsx
 export const Route = createFileRoute('/posts/{-$category}/{-$slug}')({
-  component: PostsComponent,
+    component: PostsComponent
 })
 ```
 
@@ -965,16 +965,16 @@ This tree structure is used to wrap the child routes with a layout component:
 import { Outlet, createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/app')({
-  component: AppLayoutComponent,
+    component: AppLayoutComponent
 })
 
 function AppLayoutComponent() {
-  return (
-    <div>
-      <h1>App Layout</h1>
-      <Outlet />
-    </div>
-  )
+    return (
+        <div>
+            <h1>App Layout</h1>
+            <Outlet />
+        </div>
+    )
 }
 ```
 
@@ -1036,16 +1036,16 @@ The `_pathlessLayout.tsx` route is used to wrap the child routes with a Pathless
 import { Outlet, createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/_pathlessLayout')({
-  component: PathlessLayoutComponent,
+    component: PathlessLayoutComponent
 })
 
 function PathlessLayoutComponent() {
-  return (
-    <div>
-      <h1>Pathless layout</h1>
-      <Outlet />
-    </div>
-  )
+    return (
+        <div>
+            <h1>Pathless layout</h1>
+            <Outlet />
+        </div>
+    )
 }
 ```
 
@@ -1135,20 +1135,20 @@ import { PostsHeader } from './-components/header'
 import { PostsFooter } from './-components/footer'
 
 export const Route = createFileRoute('/posts')({
-  loader: () => fetchPosts(),
-  component: PostComponent,
+    loader: () => fetchPosts(),
+    component: PostComponent
 })
 
 function PostComponent() {
-  const posts = Route.useLoaderData()
+    const posts = Route.useLoaderData()
 
-  return (
-    <div>
-      <PostsHeader />
-      <PostsTable posts={posts} />
-      <PostsFooter />
-    </div>
-  )
+    return (
+        <div>
+            <PostsHeader />
+            <PostsTable posts={posts} />
+            <PostsFooter />
+        </div>
+    )
 }
 ```
 
@@ -1199,26 +1199,20 @@ Here's a quick example of using virtual file routes to map a route tree to a set
 
 ```tsx
 // routes.ts
-import {
-  rootRoute,
-  route,
-  index,
-  layout,
-  physical,
-} from '@tanstack/virtual-file-routes'
+import { rootRoute, route, index, layout, physical } from '@tanstack/virtual-file-routes'
 
 export const routes = rootRoute('root.tsx', [
-  index('index.tsx'),
-  layout('pathlessLayout.tsx', [
-    route('/dashboard', 'app/dashboard.tsx', [
-      index('app/dashboard-index.tsx'),
-      route('/invoices', 'app/dashboard-invoices.tsx', [
-        index('app/invoices-index.tsx'),
-        route('$id', 'app/invoice-detail.tsx'),
-      ]),
-    ]),
-    physical('/posts', 'posts'),
-  ]),
+    index('index.tsx'),
+    layout('pathlessLayout.tsx', [
+        route('/dashboard', 'app/dashboard.tsx', [
+            index('app/dashboard-index.tsx'),
+            route('/invoices', 'app/dashboard-invoices.tsx', [
+                index('app/invoices-index.tsx'),
+                route('$id', 'app/invoice-detail.tsx')
+            ])
+        ]),
+        physical('/posts', 'posts')
+    ])
 ])
 ```
 
@@ -1240,13 +1234,13 @@ import react from '@vitejs/plugin-react'
 import { tanstackRouter } from '@tanstack/router-plugin/vite'
 
 export default defineConfig({
-  plugins: [
-    tanstackRouter({
-      target: 'react',
-      virtualRouteConfig: './routes.ts',
-    }),
-    react(),
-  ],
+    plugins: [
+        tanstackRouter({
+            target: 'react',
+            virtualRouteConfig: './routes.ts'
+        }),
+        react()
+    ]
 })
 ```
 
@@ -1260,11 +1254,11 @@ import { tanstackRouter } from '@tanstack/router-plugin/vite'
 import { rootRoute } from '@tanstack/virtual-file-routes'
 
 const routes = rootRoute('root.tsx', [
-  // ... the rest of your virtual route tree
+    // ... the rest of your virtual route tree
 ])
 
 export default defineConfig({
-  plugins: [tanstackRouter({ virtualRouteConfig: routes }), react()],
+    plugins: [tanstackRouter({ virtualRouteConfig: routes }), react()]
 })
 ```
 
@@ -1287,7 +1281,7 @@ The `rootRoute` function is used to create a virtual root route. It takes a file
 import { rootRoute } from '@tanstack/virtual-file-routes'
 
 export const routes = rootRoute('root.tsx', [
-  // ... children routes
+    // ... children routes
 ])
 ```
 
@@ -1300,9 +1294,9 @@ The `route` function is used to create a virtual route. It takes a path, a file 
 import { route } from '@tanstack/virtual-file-routes'
 
 export const routes = rootRoute('root.tsx', [
-  route('/about', 'about.tsx', [
-    // ... children routes
-  ]),
+    route('/about', 'about.tsx', [
+        // ... children routes
+    ])
 ])
 ```
 
@@ -1313,10 +1307,10 @@ You can also define a virtual route without a file name. This allows to set a co
 import { route } from '@tanstack/virtual-file-routes'
 
 export const routes = rootRoute('root.tsx', [
-  route('/hello', [
-    route('/world', 'world.tsx'), // full path will be "/hello/world"
-    route('/universe', 'universe.tsx'), // full path will be "/hello/universe"
-  ]),
+    route('/hello', [
+        route('/world', 'world.tsx'), // full path will be "/hello/world"
+        route('/universe', 'universe.tsx') // full path will be "/hello/universe"
+    ])
 ])
 ```
 
@@ -1339,9 +1333,9 @@ The `layout` function is used to create a virtual pathless route. It takes a fil
 import { layout } from '@tanstack/virtual-file-routes'
 
 export const routes = rootRoute('root.tsx', [
-  layout('pathlessLayout.tsx', [
-    // ... children routes
-  ]),
+    layout('pathlessLayout.tsx', [
+        // ... children routes
+    ])
 ])
 ```
 
@@ -1352,9 +1346,9 @@ You can also specify a pathless ID to give the route a unique identifier that is
 import { layout } from '@tanstack/virtual-file-routes'
 
 export const routes = rootRoute('root.tsx', [
-  layout('my-pathless-layout-id', 'pathlessLayout.tsx', [
-    // ... children routes
-  ]),
+    layout('my-pathless-layout-id', 'pathlessLayout.tsx', [
+        // ... children routes
+    ])
 ])
 ```
 
@@ -1392,19 +1386,19 @@ Let's use virtual routes to customize our route tree for everything but `posts`,
 ```tsx
 // routes.ts
 export const routes = rootRoute('root.tsx', [
-  // Set up your virtual routes as normal
-  index('index.tsx'),
-  layout('pathlessLayout.tsx', [
-    route('/dashboard', 'app/dashboard.tsx', [
-      index('app/dashboard-index.tsx'),
-      route('/invoices', 'app/dashboard-invoices.tsx', [
-        index('app/invoices-index.tsx'),
-        route('$id', 'app/invoice-detail.tsx'),
-      ]),
-    ]),
-    // Mount the `posts` directory under the `/posts` path
-    physical('/posts', 'posts'),
-  ]),
+    // Set up your virtual routes as normal
+    index('index.tsx'),
+    layout('pathlessLayout.tsx', [
+        route('/dashboard', 'app/dashboard.tsx', [
+            index('app/dashboard-index.tsx'),
+            route('/invoices', 'app/dashboard-invoices.tsx', [
+                index('app/invoices-index.tsx'),
+                route('$id', 'app/invoice-detail.tsx')
+            ])
+        ]),
+        // Mount the `posts` directory under the `/posts` path
+        physical('/posts', 'posts')
+    ])
 ])
 ```
 
@@ -1430,10 +1424,10 @@ You can merge the `features` directory routes at the root level:
 import { physical, rootRoute, route } from '@tanstack/virtual-file-routes'
 
 export const routes = rootRoute('__root.tsx', [
-  route('/about', 'about.tsx'),
-  // Merge features/ routes at root level (no path prefix)
-  physical('features'),
-  // Or equivalently: physical('', 'features')
+    route('/about', 'about.tsx'),
+    // Merge features/ routes at root level (no path prefix)
+    physical('features')
+    // Or equivalently: physical('', 'features')
 ])
 ```
 
@@ -1472,16 +1466,9 @@ Let's look at the `bar` directory which contains a special file named `__virtual
 
 ```tsx
 // routes/foo/bar/__virtual.ts
-import {
-  defineVirtualSubtreeConfig,
-  index,
-  route,
-} from '@tanstack/virtual-file-routes'
+import { defineVirtualSubtreeConfig, index, route } from '@tanstack/virtual-file-routes'
 
-export default defineVirtualSubtreeConfig([
-  index('home.tsx'),
-  route('$id', 'details.tsx'),
-])
+export default defineVirtualSubtreeConfig([index('home.tsx'), route('$id', 'details.tsx')])
 ```
 
 The helper function `defineVirtualSubtreeConfig` is closely modeled after vite's `defineConfig` and allows you to define a subtree configuration via a default export. The default export can either be
@@ -1518,7 +1505,7 @@ If you're using the TanStack Router CLI, you can configure virtual file routes b
 ```json
 // tsr.config.json
 {
-  "virtualRouteConfig": "./routes.ts"
+    "virtualRouteConfig": "./routes.ts"
 }
 ```
 
@@ -1527,55 +1514,55 @@ Or you can define the virtual routes directly in the configuration, while much l
 ```json
 // tsr.config.json
 {
-  "virtualRouteConfig": {
-    "type": "root",
-    "file": "root.tsx",
-    "children": [
-      {
-        "type": "index",
-        "file": "home.tsx"
-      },
-      {
-        "type": "route",
-        "file": "posts/posts.tsx",
-        "path": "/posts",
+    "virtualRouteConfig": {
+        "type": "root",
+        "file": "root.tsx",
         "children": [
-          {
-            "type": "index",
-            "file": "posts/posts-home.tsx"
-          },
-          {
-            "type": "route",
-            "file": "posts/posts-detail.tsx",
-            "path": "$postId"
-          }
-        ]
-      },
-      {
-        "type": "layout",
-        "id": "first",
-        "file": "layout/first-pathless-layout.tsx",
-        "children": [
-          {
-            "type": "layout",
-            "id": "second",
-            "file": "layout/second-pathless-layout.tsx",
-            "children": [
-              {
+            {
+                "type": "index",
+                "file": "home.tsx"
+            },
+            {
                 "type": "route",
-                "file": "a.tsx",
-                "path": "/route-a"
-              },
-              {
-                "type": "route",
-                "file": "b.tsx",
-                "path": "/route-b"
-              }
-            ]
-          }
+                "file": "posts/posts.tsx",
+                "path": "/posts",
+                "children": [
+                    {
+                        "type": "index",
+                        "file": "posts/posts-home.tsx"
+                    },
+                    {
+                        "type": "route",
+                        "file": "posts/posts-detail.tsx",
+                        "path": "$postId"
+                    }
+                ]
+            },
+            {
+                "type": "layout",
+                "id": "first",
+                "file": "layout/first-pathless-layout.tsx",
+                "children": [
+                    {
+                        "type": "layout",
+                        "id": "second",
+                        "file": "layout/second-pathless-layout.tsx",
+                        "children": [
+                            {
+                                "type": "route",
+                                "file": "a.tsx",
+                                "path": "/route-a"
+                            },
+                            {
+                                "type": "route",
+                                "file": "b.tsx",
+                                "path": "/route-b"
+                            }
+                        ]
+                    }
+                ]
+            }
         ]
-      }
-    ]
-  }
+    }
 }
 ```

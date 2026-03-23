@@ -1,5 +1,5 @@
 ---
-applyTo: "**/*.tsx"
+applyTo: '**/*.tsx'
 ---
 
 # Material UI (MUI) Guidelines

@@ -16,128 +16,119 @@ import { Route as LayoutIndexRouteImport } from './routes/_layout/index'
 import { Route as LayoutPersonalRouteImport } from './routes/_layout/personal'
 
 const Lotto535Route = Lotto535RouteImport.update({
-  id: '/lotto535',
-  path: '/lotto535',
-  getParentRoute: () => rootRouteImport,
+    id: '/lotto535',
+    path: '/lotto535',
+    getParentRoute: () => rootRouteImport
 } as any)
 const AuthRoute = AuthRouteImport.update({
-  id: '/auth',
-  path: '/auth',
-  getParentRoute: () => rootRouteImport,
+    id: '/auth',
+    path: '/auth',
+    getParentRoute: () => rootRouteImport
 } as any)
 const LayoutRoute = LayoutRouteImport.update({
-  id: '/_layout',
-  getParentRoute: () => rootRouteImport,
+    id: '/_layout',
+    getParentRoute: () => rootRouteImport
 } as any)
 const LayoutIndexRoute = LayoutIndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => LayoutRoute,
+    id: '/',
+    path: '/',
+    getParentRoute: () => LayoutRoute
 } as any)
 const LayoutPersonalRoute = LayoutPersonalRouteImport.update({
-  id: '/personal',
-  path: '/personal',
-  getParentRoute: () => LayoutRoute,
+    id: '/personal',
+    path: '/personal',
+    getParentRoute: () => LayoutRoute
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof LayoutIndexRoute
-  '/auth': typeof AuthRoute
-  '/lotto535': typeof Lotto535Route
-  '/personal': typeof LayoutPersonalRoute
+    '/': typeof LayoutIndexRoute
+    '/auth': typeof AuthRoute
+    '/lotto535': typeof Lotto535Route
+    '/personal': typeof LayoutPersonalRoute
 }
 export interface FileRoutesByTo {
-  '/auth': typeof AuthRoute
-  '/lotto535': typeof Lotto535Route
-  '/personal': typeof LayoutPersonalRoute
-  '/': typeof LayoutIndexRoute
+    '/auth': typeof AuthRoute
+    '/lotto535': typeof Lotto535Route
+    '/personal': typeof LayoutPersonalRoute
+    '/': typeof LayoutIndexRoute
 }
 export interface FileRoutesById {
-  __root__: typeof rootRouteImport
-  '/_layout': typeof LayoutRouteWithChildren
-  '/auth': typeof AuthRoute
-  '/lotto535': typeof Lotto535Route
-  '/_layout/personal': typeof LayoutPersonalRoute
-  '/_layout/': typeof LayoutIndexRoute
+    __root__: typeof rootRouteImport
+    '/_layout': typeof LayoutRouteWithChildren
+    '/auth': typeof AuthRoute
+    '/lotto535': typeof Lotto535Route
+    '/_layout/personal': typeof LayoutPersonalRoute
+    '/_layout/': typeof LayoutIndexRoute
 }
 export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/lotto535' | '/personal'
-  fileRoutesByTo: FileRoutesByTo
-  to: '/auth' | '/lotto535' | '/personal' | '/'
-  id:
-    | '__root__'
-    | '/_layout'
-    | '/auth'
-    | '/lotto535'
-    | '/_layout/personal'
-    | '/_layout/'
-  fileRoutesById: FileRoutesById
+    fileRoutesByFullPath: FileRoutesByFullPath
+    fullPaths: '/' | '/auth' | '/lotto535' | '/personal'
+    fileRoutesByTo: FileRoutesByTo
+    to: '/auth' | '/lotto535' | '/personal' | '/'
+    id: '__root__' | '/_layout' | '/auth' | '/lotto535' | '/_layout/personal' | '/_layout/'
+    fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  LayoutRoute: typeof LayoutRouteWithChildren
-  AuthRoute: typeof AuthRoute
-  Lotto535Route: typeof Lotto535Route
+    LayoutRoute: typeof LayoutRouteWithChildren
+    AuthRoute: typeof AuthRoute
+    Lotto535Route: typeof Lotto535Route
 }
 
 declare module '@tanstack/react-router' {
-  interface FileRoutesByPath {
-    '/lotto535': {
-      id: '/lotto535'
-      path: '/lotto535'
-      fullPath: '/lotto535'
-      preLoaderRoute: typeof Lotto535RouteImport
-      parentRoute: typeof rootRouteImport
+    interface FileRoutesByPath {
+        '/lotto535': {
+            id: '/lotto535'
+            path: '/lotto535'
+            fullPath: '/lotto535'
+            preLoaderRoute: typeof Lotto535RouteImport
+            parentRoute: typeof rootRouteImport
+        }
+        '/auth': {
+            id: '/auth'
+            path: '/auth'
+            fullPath: '/auth'
+            preLoaderRoute: typeof AuthRouteImport
+            parentRoute: typeof rootRouteImport
+        }
+        '/_layout': {
+            id: '/_layout'
+            path: ''
+            fullPath: '/'
+            preLoaderRoute: typeof LayoutRouteImport
+            parentRoute: typeof rootRouteImport
+        }
+        '/_layout/': {
+            id: '/_layout/'
+            path: '/'
+            fullPath: '/'
+            preLoaderRoute: typeof LayoutIndexRouteImport
+            parentRoute: typeof LayoutRoute
+        }
+        '/_layout/personal': {
+            id: '/_layout/personal'
+            path: '/personal'
+            fullPath: '/personal'
+            preLoaderRoute: typeof LayoutPersonalRouteImport
+            parentRoute: typeof LayoutRoute
+        }
     }
-    '/auth': {
-      id: '/auth'
-      path: '/auth'
-      fullPath: '/auth'
-      preLoaderRoute: typeof AuthRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_layout': {
-      id: '/_layout'
-      path: ''
-      fullPath: '/'
-      preLoaderRoute: typeof LayoutRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_layout/': {
-      id: '/_layout/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof LayoutIndexRouteImport
-      parentRoute: typeof LayoutRoute
-    }
-    '/_layout/personal': {
-      id: '/_layout/personal'
-      path: '/personal'
-      fullPath: '/personal'
-      preLoaderRoute: typeof LayoutPersonalRouteImport
-      parentRoute: typeof LayoutRoute
-    }
-  }
 }
 
 interface LayoutRouteChildren {
-  LayoutPersonalRoute: typeof LayoutPersonalRoute
-  LayoutIndexRoute: typeof LayoutIndexRoute
+    LayoutPersonalRoute: typeof LayoutPersonalRoute
+    LayoutIndexRoute: typeof LayoutIndexRoute
 }
 
 const LayoutRouteChildren: LayoutRouteChildren = {
-  LayoutPersonalRoute: LayoutPersonalRoute,
-  LayoutIndexRoute: LayoutIndexRoute,
+    LayoutPersonalRoute: LayoutPersonalRoute,
+    LayoutIndexRoute: LayoutIndexRoute
 }
 
-const LayoutRouteWithChildren =
-  LayoutRoute._addFileChildren(LayoutRouteChildren)
+const LayoutRouteWithChildren = LayoutRoute._addFileChildren(LayoutRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
-  LayoutRoute: LayoutRouteWithChildren,
-  AuthRoute: AuthRoute,
-  Lotto535Route: Lotto535Route,
+    LayoutRoute: LayoutRouteWithChildren,
+    AuthRoute: AuthRoute,
+    Lotto535Route: Lotto535Route
 }
-export const routeTree = rootRouteImport
-  ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>()
+export const routeTree = rootRouteImport._addFileChildren(rootRouteChildren)._addFileTypes<FileRouteTypes>()
