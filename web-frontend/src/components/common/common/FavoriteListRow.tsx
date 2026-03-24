@@ -14,7 +14,7 @@ interface Props {
     color: IBall3DColor
 }
 
-const RowFavoriteList: React.FC<Props> = (props) => {
+const FavoriteListRow: React.FC<Props> = (props) => {
     const { t } = useTranslation('common')
     const [openConfirmDeleteDialog, setOpenConfirmDeleteDialog] = useState(false)
     return (
@@ -42,4 +42,4 @@ const RowFavoriteList: React.FC<Props> = (props) => {
     )
 }
 
-export default RowFavoriteList
+export default FavoriteListRow

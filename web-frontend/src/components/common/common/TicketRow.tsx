@@ -18,7 +18,7 @@ interface Props {
     lastColor?: IBall3DColor
 }
 
-const RowTicket: React.FC<Props> = (props) => {
+const TicketRow: React.FC<Props> = (props) => {
     const [isFavorite, setIsFavorite] = useState(false)
     const notify = useNotify()
     const { t } = useTranslation('common')
@@ -56,4 +56,4 @@ const RowTicket: React.FC<Props> = (props) => {
     )
 }
 
-export default RowTicket
+export default TicketRow

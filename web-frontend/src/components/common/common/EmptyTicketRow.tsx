@@ -9,9 +9,10 @@ import CachedIcon from '@mui/icons-material/Cached'
 interface Props {
     indexText?: string
     count: number
+    onDelete: () => void
 }
 
-const EmptyRowTicket: React.FC<Props> = (props) => {
+const EmptyTicketRow: React.FC<Props> = (props) => {
     return (
         <Stack direction='row' alignItems={'center'}>
             {props.indexText && (
@@ -23,17 +24,17 @@ const EmptyRowTicket: React.FC<Props> = (props) => {
             )}
             <Stack direction='row' spacing={{ xs: 0.5, sm: 1, md: 1.5 }} mr={{ xs: 0.5, sm: 1, md: 1.5 }}>
                 {Array.from({ length: props.count }).map((_, index) => (
-                    <Ball3D key={index} color='gray' content='12' />
+                    <Ball3D key={index} color='gray' />
                 ))}
             </Stack>
             <IconButton size='small'>
                 <CachedIcon />
             </IconButton>
-            <IconButton size='small' color='error'>
+            <IconButton size='small' color='error' onClick={props.onDelete}>
                 <DeleteOutlineIcon />
             </IconButton>
         </Stack>
     )
 }
 
-export default EmptyRowTicket
+export default EmptyTicketRow
