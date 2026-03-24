@@ -4,5 +4,16 @@
         "confirm": "Confirm",
         "ok": "OK",
         "close": "Close"
+    },
+    "favoriteNumberSequence": {
+        "add": "Added number sequence to favorites list",
+        "remove": "Removed number sequence from favorites list"
+    },
+    "appBarGame": {
+        "addSequence": "Add sequence",
+        "favoriteList": "Favorite list",
+        "checkout": "Checkout",
+        "sequenceList": "Number sequence list",
+        "deleteRowFavoriteList": "Are you sure you want to delete this number sequence from the favorites list?"
     }
 }

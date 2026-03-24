@@ -1,9 +1,10 @@
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
+import type { IBall3DColor } from '../../../types/common'
 
 interface Ball3DProps {
-    content: string
-    color: 'green' | 'blue' | 'orange'
+    content?: string
+    color: IBall3DColor
 }
 
 const Ball3D: React.FC<Ball3DProps> = (props) => {
@@ -23,8 +24,8 @@ const Ball3D: React.FC<Ball3DProps> = (props) => {
     return (
         <Box
             sx={{
-                width: { xs: 40, md: 70 },
-                height: { xs: 40, md: 70 },
+                width: { xs: 38, md: 70 },
+                height: { xs: 38, md: 70 },
                 borderRadius: '50%',
                 background: getGradient(),
                 display: 'flex',

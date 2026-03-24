@@ -4,5 +4,16 @@
         "confirm": "Xác nhận",
         "ok": "Đồng ý",
         "close": "Đóng"
+    },
+    "favoriteNumberSequence": {
+        "add": "Đã thêm dãy số vào danh sách yêu thích",
+        "remove": "Đã xóa dãy số khỏi danh sách yêu thích"
+    },
+    "appBarGame": {
+        "addSequence": "Thêm dãy số",
+        "favoriteList": "Danh sách yêu thích",
+        "checkout": "Thanh toán",
+        "sequenceList": "Danh sách dãy số",
+        "deleteRowFavoriteList": "Bạn có chắc chắn muốn xóa dãy số này khỏi danh sách yêu thích?"
     }
 }
