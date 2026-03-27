@@ -12,7 +12,7 @@ interface Props {
 
 const BottomNavbar: React.FC<Props> = ({ items, activeHrefTo }) => {
     return (
-        <AppBar position='fixed' sx={{ top: 'auto', bottom: 0 }}>
+        <AppBar position='fixed' sx={{ top: 'auto', bottom: 0 }} component={'footer'}>
             <BottomNavigation showLabels value={activeHrefTo}>
                 {items.map((item) => (
                     <BottomNavigationAction

@@ -24,8 +24,8 @@ const CustomDrawer: React.FC<Props> = (props) => {
                 minWidth={300}
                 minHeight={300}
                 overflow={'auto'}
-                maxHeight={breakpoint.md ? '100vh' : '50vh'}
-                maxWidth={!breakpoint.md ? '100vw' : '50vw'}
+                maxHeight={breakpoint.md ? '100vh' : '80vh'}
+                maxWidth={!breakpoint.md ? '100vw' : '60vw'}
             >
                 {props.title && (
                     <>

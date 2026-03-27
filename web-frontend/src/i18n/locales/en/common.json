@@ -14,6 +14,24 @@
         "favoriteList": "Favorite list",
         "checkout": "Checkout",
         "sequenceList": "Number sequence list",
-        "deleteRowFavoriteList": "Are you sure you want to delete this number sequence from the favorites list?"
+        "deleteRowFavoriteList": "Are you sure you want to delete this number sequence from the favorites list?",
+        "estimatedPrice": "Estimated price",
+        "emptyFavoriteList": "No favorites saved yet"
+    },
+    "selectTicket": {
+        "title": "Select numbers",
+        "hint": "Choose {{count}} numbers",
+        "random": "Random",
+        "confirm": "Confirm",
+        "reset": "Reset"
+    },
+    "checkoutBill": {
+        "title": "Checkout Bill",
+        "demoMode": "Demo Mode",
+        "back": "Back to game",
+        "gameName": "Game",
+        "ticketCount": "Tickets",
+        "totalAmount": "Total amount",
+        "payNow": "Pay now"
     }
 }

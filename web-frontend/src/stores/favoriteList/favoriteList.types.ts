@@ -1,6 +1,7 @@
 import type { IBall3DColor, IGameType } from '../../types/common'
 
 export interface IFavoriteItem {
+    id: string
     type: IGameType
     numbers: string[]
     color: IBall3DColor
@@ -8,6 +9,6 @@ export interface IFavoriteItem {
 
 export interface IFavoriteListState {
     favoriteList: IFavoriteItem[]
-    addFavoriteItem: (favoriteItem: IFavoriteItem) => void
-    removeFavoriteItem: (index: number) => void
+    addFavoriteItem: (item: Omit<IFavoriteItem, 'id'>) => void
+    removeFavoriteItem: (id: string) => void
 }

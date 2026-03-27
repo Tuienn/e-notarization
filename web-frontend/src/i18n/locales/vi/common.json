@@ -14,6 +14,24 @@
         "favoriteList": "Danh sách yêu thích",
         "checkout": "Thanh toán",
         "sequenceList": "Danh sách dãy số",
-        "deleteRowFavoriteList": "Bạn có chắc chắn muốn xóa dãy số này khỏi danh sách yêu thích?"
+        "deleteRowFavoriteList": "Bạn có chắc chắn muốn xóa dãy số này khỏi danh sách yêu thích?",
+        "estimatedPrice": "Giá vé dự tính",
+        "emptyFavoriteList": "Chưa có dãy số yêu thích nào"
+    },
+    "selectTicket": {
+        "title": "Chọn số",
+        "hint": "Chọn {{count}} số",
+        "random": "Ngẫu nhiên",
+        "confirm": "Xác nhận",
+        "reset": "Đặt lại"
+    },
+    "checkoutBill": {
+        "title": "Hóa đơn thanh toán",
+        "demoMode": "Chế độ demo",
+        "back": "Quay lại trò chơi",
+        "gameName": "Trò chơi",
+        "ticketCount": "Số lượng vé",
+        "totalAmount": "Tổng tiền",
+        "payNow": "Thanh toán ngay"
     }
 }
